@@ -15,6 +15,8 @@ export default MainButton;
 
 const styles = StyleSheet.create({
   buttonInnerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: GlobalStyles.colors.accentGold,
     height: 50,
     padding: 13,

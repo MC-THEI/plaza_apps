@@ -3,7 +3,7 @@ export enum NavigationTypes {
   Map = 'Map',
   Hotel = 'Hotel',
   Offer = 'Offer',
-  Favorite = 'Favorite',
+  Favorite = 'Favorites',
   Login = 'Login',
   Registration = 'Registration',
 }

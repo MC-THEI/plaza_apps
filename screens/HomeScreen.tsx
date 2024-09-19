@@ -1,5 +1,4 @@
 import { View, StyleSheet, Image, Text } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 import SectionWrapper from '../ui/SectionWrapper';
 import SectionTitle from '../ui/SectionTitle';
 import SearchButtons from '../components/Home/SearchButtons';
@@ -14,13 +13,12 @@ import {
 import MainTitle from '../components/Home/MainTitle';
 import { GlobalStyles } from '../constants/styles';
 import { IcoMoon_pwai } from '../ui/IcoMoon';
+import { NavigationTypes } from '../types/NavigationTypes';
 
 function HomeScreen() {
   return (
     <ScreenScrollableWrapper>
       <View style={styles.container}>
-        <StatusBar style="light" />
-
         {/* Header*/}
         <ScreenHeader bgImg="home" isUrl={false}>
           <Image
@@ -48,14 +46,14 @@ function HomeScreen() {
           <SectionWrapper bgColor={'light'}>
             <View style={styles.cardInnerContainer}>
               <SectionTitle title={hotelCardsTitle[1]} />
-              <Cards />
+              <Cards openScreen={NavigationTypes.Hotel} />
             </View>
           </SectionWrapper>
 
           {/* Offers*/}
           <SectionWrapper bgColor={'dark'}>
             <SectionTitle title={offersCardsTitle[1]} />
-            <Cards />
+            <Cards openScreen={NavigationTypes.Offer} />
           </SectionWrapper>
         </View>
       </View>

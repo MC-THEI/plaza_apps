@@ -1,19 +1,19 @@
 import { View, StyleSheet } from 'react-native';
 import MainButton from '../../ui/MainButton';
-import { searchButtonsTitle } from '../../assets/languages';
+import { filterButtonsTitle } from '../../assets/languages';
 
-function SearchButtons() {
+function FilterButtons() {
   return (
     <View style={styles.buttonOuterContainer}>
       <View style={styles.buttonInnerContainer}>
-        <MainButton title={searchButtonsTitle.hotels[1]} />
-        <MainButton title={searchButtonsTitle.offers[1]} />
+        <MainButton title={filterButtonsTitle.hotels[1]} />
+        <MainButton title={filterButtonsTitle.offers[1]} />
       </View>
     </View>
   );
 }
 
-export default SearchButtons;
+export default FilterButtons;
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {},

@@ -1,3 +1,7 @@
+import { Dimensions } from 'react-native';
+
+export const deviceWidth = Dimensions.get('window').width;
+
 export const GlobalStyles = {
   colors: {
     neutralGray_light: '#707070',
@@ -10,9 +14,10 @@ export const GlobalStyles = {
     successGreen_primary: '#00AF8B',
   },
   fontSize: {
-    titleFontSize: 37,
+    titleFontSize: deviceWidth > 500 ? 60 : 37,
     mainButtonFontSize: 16,
     cardFontSize: 16,
     sectionTitleFontSize: 18,
+    listFontSize: 14,
   },
 };

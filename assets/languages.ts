@@ -16,6 +16,11 @@ export const offersCardsTitle: TitleTypes = {
   2: { mainTitle: 'Our', subTitle: 'Offers' },
 };
 
+export const searchButtonsTitle = {
+  hotels: { 1: 'Hotel suchen', 2: 'Search Hotel' },
+  offers: { 1: 'Angebot suchen', 2: 'Search Offer' },
+};
+
 // HotelScreen ---------------------------------------------------------------
 export const hotelMenuButtonTitles = {
   call: { 1: 'Anrufen', 2: 'Call' },
@@ -39,4 +44,23 @@ export const informationTitle: TitleTypes = {
 export const facilitiesTitle: TitleTypes = {
   1: { mainTitle: 'Ausstattungen', subTitle: 'des Hotels' },
   2: { mainTitle: 'Hotel', subTitle: 'Facilities' },
+};
+
+// FavoritesScreen -------------------------------------------------------------
+
+export const mainTitleFavorites: TitleTypes = {
+  1: { mainTitle: 'Ihre', subTitle: 'Favoriten' },
+  2: { mainTitle: 'Your', subTitle: 'Favorites' },
+};
+
+export const filterButtonsTitle = {
+  hotels: { 1: 'Hotels', 2: 'Hotels' },
+  offers: { 1: 'Angebote', 2: 'Offers' },
+};
+
+// OfferScreen -----------------------------------------------------------------
+
+export const ourOfferTitle: TitleTypes = {
+  1: { mainTitle: 'Unser Angebot', subTitle: 'für Sie' },
+  2: { mainTitle: 'Our Offer', subTitle: 'for you' },
 };

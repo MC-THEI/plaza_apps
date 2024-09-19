@@ -14,8 +14,7 @@ function MainTitle({
     <View style={[styles.titleContainer, height]}>
       <Text style={[styles.title, fontSize]}>
         {title.mainTitle}
-        {'\n'}
-        <Text style={styles.subTitle}>{title.subTitle}</Text>
+        <Text style={styles.subTitle}> {title.subTitle}</Text>
       </Text>
     </View>
   );

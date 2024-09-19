@@ -2,18 +2,17 @@ import { View, StyleSheet } from 'react-native';
 import MainButton from '../../ui/MainButton';
 import { searchButtonsTitle } from '../../assets/languages';
 
-function SearchButtons() {
+function PriceButton() {
   return (
     <View style={styles.buttonOuterContainer}>
       <View style={styles.buttonInnerContainer}>
-        <MainButton title={searchButtonsTitle.hotels[1]} />
-        <MainButton title={searchButtonsTitle.offers[1]} />
+        <MainButton title={'ab 100€'} />
       </View>
     </View>
   );
 }
 
-export default SearchButtons;
+export default PriceButton;
 
 const styles = StyleSheet.create({
   buttonOuterContainer: {},

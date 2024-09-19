@@ -52,7 +52,7 @@ function NavBar() {
         />
       </NavBtn>
       <NavBtn
-        BtnName="Favorite"
+        BtnName="Favorites"
         onPress={() => handleClickNavBtn(NavigationTypes.Favorite)}
       >
         <IcoMoon_pwai

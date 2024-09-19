@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import MapScreen from './screens/MapScreen';
 import HotelScreen from './screens/HotelScreen';
 import OfferScreen from './screens/OfferScreen';
-import FavoriteScreen from './screens/FavoriteScreen';
+import FavoriteScreen from './screens/FavoritesScreen';
 import NavBar from './ui/NavBar';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import RegistrationScreen from './screens/RegistrationScreen';
@@ -14,6 +14,7 @@ import { NavigationTypes } from './types/NavigationTypes';
 import * as Font from 'expo-font';
 import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
+import FavoritesScreen from './screens/FavoritesScreen';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -31,35 +32,40 @@ function HomeStackNavigator() {
         name={NavigationTypes.Home}
         component={HomeScreen}
         options={{
-          title: 'Home',
+          title: NavigationTypes.Home,
         }}
       />
       <Stack.Screen
         name={NavigationTypes.Map}
         component={MapScreen}
         options={{
-          title: 'Karte',
+          title: NavigationTypes.Map,
         }}
       />
       <Stack.Screen
         name={NavigationTypes.Registration}
         component={RegistrationScreen}
-        options={{ title: 'Registrieren' }}
+        options={{ title: NavigationTypes.Registration }}
       />
       <Stack.Screen
         name={NavigationTypes.Login}
         component={LoginScreen}
-        options={{ title: 'Login' }}
+        options={{ title: NavigationTypes.Login }}
       />
       <Stack.Screen
         name={NavigationTypes.Favorite}
-        component={FavoriteScreen}
-        options={{ title: 'Favorites' }}
+        component={FavoritesScreen}
+        options={{ title: NavigationTypes.Favorite }}
       />
       <Stack.Screen
         name={NavigationTypes.Hotel}
         component={HotelScreen}
-        options={{ title: 'Hotel' }}
+        options={{ title: NavigationTypes.Hotel }}
+      />
+      <Stack.Screen
+        name={NavigationTypes.Offer}
+        component={OfferScreen}
+        options={{ title: NavigationTypes.Offer }}
       />
     </Stack.Navigator>
   );

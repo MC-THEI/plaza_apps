@@ -1,17 +1,16 @@
 import { View, StyleSheet, Text, Image, Pressable } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 import { useNavigation } from '@react-navigation/native';
-import { NavigationTypes } from '../types/NavigationTypes';
 
-function Card() {
+function Card({ onPress }: { onPress: () => void }) {
   const navigation = useNavigation();
 
   function handlePressCard() {
-    navigation.navigate(NavigationTypes.Hotel);
+    onPress();
   }
 
   return (
-    <Pressable style={styles.container} onPress={handlePressCard}>
+    <Pressable style={styles.container} onPress={() => handlePressCard()}>
       <View style={styles.iconLogoContainer}>
         <Image
           style={styles.iconLogo}

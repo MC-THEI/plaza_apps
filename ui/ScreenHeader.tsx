@@ -5,10 +5,12 @@ function ScreenHeader({
   children,
   bgImg,
   isUrl,
+  height = 580,
 }: {
   bgImg: string;
   children?: React.ReactNode;
   isUrl?: boolean;
+  height?: number;
 }) {
   const images = {
     home: require('../assets/images/PLAZA_App_Home.png'),
@@ -16,14 +18,11 @@ function ScreenHeader({
   };
 
   return (
-    <LinearGradient
-      colors={['#3d3d3d', '#3d3d3d']}
-      style={styles.imageContainer}
-    >
+    <LinearGradient colors={['#3d3d3d', '#3d3d3d']} style={{ height: height }}>
       <ImageBackground
         source={isUrl ? { uri: bgImg } : images[bgImg]}
         resizeMode="cover"
-        style={styles.imageContainer}
+        style={{ height: height }}
         imageStyle={styles.backgroundImage}
       >
         {children}
@@ -35,9 +34,7 @@ function ScreenHeader({
 export default ScreenHeader;
 
 const styles = StyleSheet.create({
-  imageContainer: {
-    height: 580,
-  },
+  imageContainer: {},
   backgroundImage: {
     opacity: 0.35,
   },
