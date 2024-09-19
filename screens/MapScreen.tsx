@@ -1,25 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import MapList from '../components/Map/MapList';
+import Map from '../components/Map/Map';
+import MapToolBar from '../components/Map/MapToolBar';
 
 function MapScreen() {
   return (
     <>
       <StatusBar style="dark" />
-      <View style={styles.container}>
-        <View style={styles.container}>
-          <Text>MapScreen</Text>
-        </View>
-      </View>
+      <Map />
+      <MapToolBar />
+      <MapList />
     </>
   );
 }
 
 export default MapScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

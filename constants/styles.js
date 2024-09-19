@@ -20,5 +20,6 @@ export const GlobalStyles = {
     sectionTitleFontSize: 18,
     listFontSize: 14,
     offerPeriodFontSize: 18,
+    inputFontSize: 18,
   },
 };

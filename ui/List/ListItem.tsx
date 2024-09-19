@@ -2,6 +2,13 @@ import { Image, View, StyleSheet, Pressable, Text } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import { IcoMoon_mci, IcoMoon_pwai } from '../IcoMoon';
 
+const dummyData = {
+  id: 1,
+  imgUrl: 'https://preview.plazahotels.de/media/210_dz-komfort.jpg',
+  name: 'Plaza Hotels Hanauu',
+  location: 'DE-Brunswick',
+};
+
 function ListItem({ item, bgColor }: { item: any; bgColor: string }) {
   return (
     <Pressable
@@ -18,21 +25,21 @@ function ListItem({ item, bgColor }: { item: any; bgColor: string }) {
           <Image
             style={styles.image}
             source={{
-              uri: 'https://preview.plazahotels.de/media/210_dz-komfort.jpg',
+              uri: dummyData.imgUrl,
             }}
             resizeMode="cover"
           />
         </View>
         <View style={styles.textContainer}>
           <View>
-            <Text style={styles.textName}>Plaza Hotels Hanau</Text>
+            <Text style={styles.textName}>{dummyData.name}</Text>
             <View style={styles.locationContainer}>
               <IcoMoon_mci
                 name="marker"
                 color={GlobalStyles.colors.accentGold}
                 size={15}
               />
-              <Text style={styles.locationText}>DE-Brunswick</Text>
+              <Text style={styles.locationText}>{dummyData.location}</Text>
             </View>
           </View>
           {/* Name*/}
