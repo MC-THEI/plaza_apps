@@ -4,7 +4,7 @@ import { GlobalStyles } from '../constants/styles';
 function SectionTitle({
   title,
 }: {
-  title: { mainTitle: string; subTitle?: string };
+  title: { mainTitle?: string; subTitle?: string };
 }) {
   return (
     <Text style={styles.container}>

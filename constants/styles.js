@@ -19,5 +19,6 @@ export const GlobalStyles = {
     cardFontSize: 16,
     sectionTitleFontSize: 18,
     listFontSize: 14,
+    offerPeriodFontSize: 18,
   },
 };

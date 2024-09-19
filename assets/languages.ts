@@ -48,9 +48,18 @@ export const facilitiesTitle: TitleTypes = {
 
 // FavoritesScreen -------------------------------------------------------------
 
-export const mainTitleFavorites: TitleTypes = {
-  1: { mainTitle: 'Ihre', subTitle: 'Favoriten' },
+export const mainTitleFavorites = {
+  1: { mainTitle: 'Ihr', subTitle: 'Favoriten' },
   2: { mainTitle: 'Your', subTitle: 'Favorites' },
+};
+
+export const mainTitleHotelFavorites = {
+  1: { subTitle: 'Hotels' },
+  2: { subTitle: 'Hotels' },
+};
+export const mainTitleOfferFavorites = {
+  1: { subTitle: 'Angebote' },
+  2: { subTitle: 'Offers' },
 };
 
 export const filterButtonsTitle = {

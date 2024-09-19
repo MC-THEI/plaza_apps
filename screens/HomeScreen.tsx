@@ -1,60 +1,19 @@
 import { View, StyleSheet, Image, Text } from 'react-native';
-import SectionWrapper from '../ui/SectionWrapper';
-import SectionTitle from '../ui/SectionTitle';
 import SearchButtons from '../components/Home/SearchButtons';
-import ScreenHeader from '../ui/ScreenHeader';
 import ScreenScrollableWrapper from '../ui/ScreenScrollableWrapper';
-import Cards from '../ui/Cards';
-import {
-  hotelCardsTitle,
-  mainTitleHome,
-  offersCardsTitle,
-} from '../assets/languages';
-import MainTitle from '../components/Home/MainTitle';
-import { GlobalStyles } from '../constants/styles';
-import { IcoMoon_pwai } from '../ui/IcoMoon';
-import { NavigationTypes } from '../types/NavigationTypes';
+import OffersSlider from '../components/Home/OffersSlider';
+import HotelsSlider from '../components/Home/HotelsSlider';
+import HomeHero from '../components/Home/HomeHero';
 
 function HomeScreen() {
   return (
     <ScreenScrollableWrapper>
       <View style={styles.container}>
-        {/* Header*/}
-        <ScreenHeader bgImg="home" isUrl={false}>
-          <Image
-            style={styles.logo}
-            source={require('../assets/images/plaza-logo-weiss.png')}
-          />
-
-          <MainTitle title={mainTitleHome[1]} />
-
-          {/* Icon */}
-          <View style={styles.iconContainer}>
-            <IcoMoon_pwai
-              name="search"
-              size={45}
-              color={GlobalStyles.colors.accentGold}
-            />
-          </View>
-        </ScreenHeader>
-
-        {/* Search Buttons*/}
+        <HomeHero />
         <SearchButtons />
-
         <View style={styles.cardsContainer}>
-          {/* Hotels*/}
-          <SectionWrapper bgColor={'light'}>
-            <View style={styles.cardInnerContainer}>
-              <SectionTitle title={hotelCardsTitle[1]} />
-              <Cards openScreen={NavigationTypes.Hotel} />
-            </View>
-          </SectionWrapper>
-
-          {/* Offers*/}
-          <SectionWrapper bgColor={'dark'}>
-            <SectionTitle title={offersCardsTitle[1]} />
-            <Cards openScreen={NavigationTypes.Offer} />
-          </SectionWrapper>
+          <HotelsSlider />
+          <OffersSlider />
         </View>
       </View>
     </ScreenScrollableWrapper>
@@ -68,33 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-
   cardsContainer: {
     marginTop: 30,
-  },
-  cardInnerContainer: {
-    overflow: 'scroll',
-  },
-  logo: {
-    marginLeft: 20,
-    marginTop: 50,
-    width: 130,
-    height: 70,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 10,
-  },
-  iconContainer: {
-    position: 'absolute',
-    bottom: 70,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-  },
-  titleIcon: {
-    color: GlobalStyles.colors.accentGold,
-    paddingTop: 30,
-    fontSize: 20,
   },
 });

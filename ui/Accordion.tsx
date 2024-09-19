@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
@@ -11,7 +11,7 @@ function AccordionItem({
   isExpanded,
   children,
   viewKey,
-  duration = 300,
+  duration = 250,
   minVisibleHeight = 40, // The height corresponding to 2 visible lines
 }: {
   isExpanded: boolean;
@@ -20,30 +20,57 @@ function AccordionItem({
   duration?: number;
   minVisibleHeight?: number;
 }) {
-  const animatedHeight = useSharedValue(isExpanded ? 1 : 0);
+  const [contentHeight, setContentHeight] = useState(0);
+
+  // Shared value for the content height animation
+  const accordionHeight = useSharedValue(
+    isExpanded ? contentHeight : minVisibleHeight
+  );
+
+  // Shared value for the gradient height animation
+  const gradientHeight = useSharedValue(isExpanded ? 0 : 30);
 
   // Update the animation when the isExpanded value changes
   React.useEffect(() => {
-    animatedHeight.value = withTiming(isExpanded ? 1 : 0, { duration });
-  }, [isExpanded]);
+    accordionHeight.value = withTiming(
+      isExpanded ? contentHeight : minVisibleHeight,
+      { duration }
+    );
+    gradientHeight.value = withTiming(isExpanded ? 0 : 30, { duration });
+  }, [isExpanded, contentHeight]);
 
-  const bodyStyle = useAnimatedStyle(() => ({
-    height: animatedHeight.value * (120 - minVisibleHeight) + minVisibleHeight,
-    // opacity: animatedHeight.value, // Optional, to animate the opacity as well
+  // Animated style for the accordion height
+  const accHeight = useAnimatedStyle(() => ({
+    height: accordionHeight.value,
+  }));
+
+  // Animated style for the gradient height
+  const animatedGradient = useAnimatedStyle(() => ({
+    height: gradientHeight.value,
   }));
 
   return (
     <Animated.View
       key={`accordionItem_${viewKey}`}
-      style={[styles.animatedView, bodyStyle]}
+      style={[styles.animatedView, accHeight]}
     >
-      <View style={styles.wrapper}>{children}</View>
-      <LinearGradient
-        colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-        style={styles.bottomOverlay}
-      />
+      <View
+        style={styles.wrapper}
+        onLayout={(event) => {
+          const { height } = event.nativeEvent.layout;
+          setContentHeight(height);
+        }}
+      >
+        {children}
+      </View>
+      <Animated.View style={[styles.bottomOverlay, animatedGradient]}>
+        <LinearGradient
+          colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+          style={StyleSheet.absoluteFill}
+        />
+      </Animated.View>
     </Animated.View>
   );
 }
@@ -51,12 +78,18 @@ function AccordionItem({
 function Accordion({
   open,
   children,
+  minVisibleHeight,
 }: {
   open: boolean;
   children: React.ReactNode;
+  minVisibleHeight?: number;
 }) {
   return (
-    <AccordionItem isExpanded={open} viewKey="Accordion">
+    <AccordionItem
+      minVisibleHeight={minVisibleHeight}
+      isExpanded={open}
+      viewKey="Accordion"
+    >
       {children}
     </AccordionItem>
   );
@@ -75,7 +108,6 @@ const styles = StyleSheet.create({
   bottomOverlay: {
     position: 'absolute',
     bottom: 0,
-    height: 30,
     width: '100%',
   },
 });

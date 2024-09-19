@@ -6,7 +6,7 @@ function SectionWrapper({
   bgColor,
 }: {
   children: React.ReactNode;
-  bgColor: string;
+  bgColor?: string;
   padding?: number;
 }) {
   return (

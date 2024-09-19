@@ -54,7 +54,7 @@ export default ListItem;
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
+    height: 87,
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -63,12 +63,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   imageContainer: {
-    width: 100,
+    width: 120,
     height: '100%',
   },
   image: {
     width: '100%',
-    height: '100%',
+    height: '97%',
   },
   textContainer: {
     padding: 10,
