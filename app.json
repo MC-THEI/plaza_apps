@@ -13,13 +13,15 @@
       "backgroundColor": "#3D3D3D"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.theider90.PlazaApps"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#3D3D3D"
-      }
+      },
+      "package": "com.theider90.PlazaApps"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -29,7 +31,12 @@
     ],
     "plugins": [
       "expo-font",
-      "expo-asset"
-    ]
+      "expo-asset",
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "ffa0d5a9-7657-4118-899d-2c6e34943740"
+      }
+    }
   }
 }
