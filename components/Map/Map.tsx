@@ -1,10 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
+import Mapbox from '@rnmapbox/maps';
 
 function Map() {
+  Mapbox.setAccessToken(
+    'pk.eyJ1IjoicGxhemFob3RlbHMiLCJhIjoiY2p6MTI4emx5MGhlbjNna245MTVwdDR0NiJ9.C5wKHhbeIX9mOLUq2Tiutg'
+  );
+
   return (
     <View style={styles.mapContainer}>
-      <Text>Map</Text>
+      <Mapbox.MapView style={styles.map} />
     </View>
   );
 }
@@ -17,5 +22,8 @@ const styles = StyleSheet.create({
     backgroundColor: GlobalStyles.colors.neutralGray_light,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  map: {
+    flex: 1,
   },
 });
