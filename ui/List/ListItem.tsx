@@ -1,6 +1,7 @@
 import { Image, View, StyleSheet, Pressable, Text } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import { IcoMoon_mci, IcoMoon_pwai } from '../IcoMoon';
+import FavoriteIcon from '../FavoriteIcon';
 
 const dummyData = {
   id: 1,
@@ -47,11 +48,7 @@ function ListItem({ item, bgColor }: { item: any; bgColor: string }) {
         </View>
       </View>
       <View style={styles.favBtnContainer}>
-        <IcoMoon_pwai
-          name="heart"
-          color={GlobalStyles.colors.accentGold}
-          size={22}
-        />
+        <FavoriteIcon size={20} />
       </View>
     </Pressable>
   );

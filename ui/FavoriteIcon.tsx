@@ -1,24 +1,29 @@
-import { Text, View, StyleSheet } from 'react-native';
+import { GlobalStyles } from '../constants/styles';
+import { IcoMoon_pwai } from './IcoMoon';
+import { useState } from 'react';
+import { Pressable } from 'react-native';
 
-function FavoriteIcon({ style }: { style?: {} }) {
+function FavoriteIcon({ size }: { size?: number }) {
+  const [isFavorite, setIsFavorite] = useState(true);
+
   return (
-    <View style={styles.container}>
-      <Text>F</Text>
-    </View>
+    <Pressable>
+      {isFavorite && (
+        <IcoMoon_pwai
+          name="heart"
+          size={size}
+          color={GlobalStyles.colors.accentRed}
+        />
+      )}
+      {!isFavorite && (
+        <IcoMoon_pwai
+          name="heart-contour"
+          size={size}
+          color={GlobalStyles.colors.accentRed}
+        />
+      )}
+    </Pressable>
   );
 }
 
 export default FavoriteIcon;
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: 50,
-    right: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 50,
-    height: 50,
-    backgroundColor: 'white',
-  },
-});

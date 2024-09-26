@@ -8,8 +8,17 @@ import {
 } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 import { useNavigation } from '@react-navigation/native';
+import FavoriteIcon from './FavoriteIcon';
+import { IHotel } from '../types/HotelTypes';
+import { IOffer } from '../types/OfferTypes';
 
-function Card({ onPress }: { onPress: () => void }) {
+function Card({
+  cardData,
+  onPress,
+}: {
+  cardData: IHotel | IOffer;
+  onPress: () => void;
+}) {
   const navigation = useNavigation();
 
   function handlePressCard() {
@@ -42,12 +51,7 @@ function Card({ onPress }: { onPress: () => void }) {
         </View>
       </View>
       <View style={styles.iconLogoContainer}>
-        <Image
-          style={styles.favIcon}
-          source={{
-            uri: 'https://placehold.co/50.png',
-          }}
-        />
+        <FavoriteIcon size={26} />
       </View>
     </Pressable>
   );
@@ -76,6 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginRight: 12,
+    marginBottom: 12,
   },
   textContainer: {
     marginLeft: 12,

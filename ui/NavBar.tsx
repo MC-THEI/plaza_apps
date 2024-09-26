@@ -3,6 +3,7 @@ import { GlobalStyles } from '../constants/styles';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationTypes } from '../types/NavigationTypes';
 import { IcoMoon_mci, IcoMoon_pwai } from './IcoMoon';
+import FavoriteIcon from './FavoriteIcon';
 
 function NavBtn({
   BtnName,
@@ -55,11 +56,7 @@ function NavBar() {
         BtnName="Favorites"
         onPress={() => handleClickNavBtn(NavigationTypes.Favorite)}
       >
-        <IcoMoon_pwai
-          name="heart"
-          size={22}
-          color={GlobalStyles.colors.accentGold}
-        />
+        <FavoriteIcon size={22} />
       </NavBtn>
       <NavBtn
         BtnName="Map"
