@@ -6,53 +6,89 @@ import {
   Pressable,
   ImageBackground,
 } from 'react-native';
+import { useMemo } from 'react';
 import { GlobalStyles } from '../constants/styles';
-import { useNavigation } from '@react-navigation/native';
 import FavoriteIcon from './FavoriteIcon';
 import { IHotel } from '../types/HotelTypes';
 import { IOffer } from '../types/OfferTypes';
+import { NavigationTypes } from '../types/NavigationTypes';
+import { IcoMoon_pwai } from './IcoMoon';
+import { getCountryCode } from '../utils/helper';
+import { useAppSelector } from '../store/redux/store';
 
 function Card({
+  cardType,
   cardData,
   onPress,
 }: {
+  cardType: string;
   cardData: IHotel | IOffer;
   onPress: () => void;
 }) {
-  const navigation = useNavigation();
-
   function handlePressCard() {
     onPress();
   }
 
+  const { hotels } = useAppSelector((state) => state.hotels);
+
+  const offerHotel = useMemo(() => {
+    if (cardType === NavigationTypes.Offer) {
+      return hotels.find(
+        (hotel) => (hotel as IHotel).id === (cardData as IOffer).hotel.id
+      );
+    }
+    return null;
+  }, [cardType, cardData, hotels]);
+
+  const hotelCard = cardType === NavigationTypes.Hotel;
+
+  const cardLocation = (
+    <Text style={styles.locationText}>
+      {hotelCard ? cardData.location?.city : offerHotel.location?.city}
+    </Text>
+  );
+
+  const countryCode = getCountryCode(
+    hotelCard ? cardData.location?.country : offerHotel.location?.country
+  );
+
+  console.log(cardData);
+
   return (
     <Pressable style={styles.container} onPress={() => handlePressCard()}>
-      <View style={styles.iconLogoContainer}>
-        <Image
-          style={styles.iconLogo}
-          source={{
-            uri: 'https://placehold.co/50.png',
-          }}
-        />
-      </View>
-      <View style={styles.textContainer}>
-        <Text
-          style={styles.hotelNameText}
-          numberOfLines={1}
-          ellipsizeMode="tail"
-        >
-          Best Western Plus Plaza Berlin Kurfürstendamm
-        </Text>
-        <View style={styles.locationContainer}>
-          <Text style={styles.locationIcon}>L</Text>
-          <Text style={styles.locationText}>
-            DE – <Text style={styles.locationText}>Berlin</Text>
-          </Text>
+      <ImageBackground>
+        <View style={styles.iconLogoContainer}>
+          <Image
+            style={styles.iconLogo}
+            source={{
+              uri: 'https://placehold.co/50.png',
+            }}
+          />
         </View>
-      </View>
-      <View style={styles.iconLogoContainer}>
-        <FavoriteIcon size={26} />
-      </View>
+        <View style={styles.textContainer}>
+          <Text
+            style={styles.hotelNameText}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {cardData.name}
+          </Text>
+          <View style={styles.locationContainer}>
+            <IcoMoon_pwai
+              style={styles.locationIcon}
+              name="marker"
+              color={GlobalStyles.colors.neutralGray_dark}
+            />
+            <Text style={styles.locationText}>
+              {countryCode}
+              <Text style={styles.locationText}>{cardLocation}</Text>
+            </Text>
+          </View>
+        </View>
+        <View style={styles.iconLogoContainer}>
+          <FavoriteIcon size={26} />
+        </View>
+      </ImageBackground>
     </Pressable>
   );
 }
@@ -91,6 +127,7 @@ const styles = StyleSheet.create({
   },
   locationIcon: {
     marginRight: 5,
+    marginTop: 3,
   },
   hotelNameText: {
     fontFamily: 'lato-v16-latin-700',

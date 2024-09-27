@@ -4,29 +4,36 @@ import { useNavigation } from '@react-navigation/native';
 import { NavigationTypes } from '../types/NavigationTypes';
 import { IHotel } from '../types/HotelTypes';
 import { IOffer } from '../types/OfferTypes';
+import { useAppDispatch } from '../store/redux/store';
+import { setCurrentHotel } from '../store/redux/hotels';
+import { setCurrentOffer } from '../store/redux/offers';
 
 function Cards({
-  openScreen,
+  cardType,
   cardData,
 }: {
-  openScreen: string;
+  cardType: string;
   cardData: IHotel[] | IOffer[];
 }) {
-  console.log(cardData);
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
 
-  function handleClick() {
-    if (openScreen === NavigationTypes.Hotel)
+  function handleClick(id: number) {
+    if (cardType === NavigationTypes.Hotel)
       navigation.navigate(NavigationTypes.Hotel);
-    if (openScreen === NavigationTypes.Offer)
+    dispatch(setCurrentHotel(id));
+
+    if (cardType === NavigationTypes.Offer)
       navigation.navigate(NavigationTypes.Offer);
+    dispatch(setCurrentOffer(id));
   }
 
   const renderItem = ({ item }: { item: IHotel | IOffer }) => (
     <Card
+      cardType={cardType}
       cardData={item}
       onPress={() => {
-        handleClick();
+        handleClick(item.id);
       }}
     />
   );
