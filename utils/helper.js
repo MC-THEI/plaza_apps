@@ -10,6 +10,35 @@ export const loadFonts = () =>
     IcoMoon_mci: require('../assets/fonts/icomoon/mci/plazahotels.ttf'),
   });
 
+export const countryToCode = {
+  Deutschland: 'DE',
+  Germany: 'DE',
+  Österreich: 'AT',
+  Austria: 'AT',
+  Schweiz: 'CH',
+  Switzerland: 'CH',
+  Frankreich: 'FR',
+  France: 'FR',
+  Niederlande: 'NL',
+  Netherlands: 'NL',
+  Italien: 'IT',
+  Italy: 'IT',
+  Spanien: 'ES',
+  Spain: 'ES',
+  UK: 'GB',
+  UnitedKingdom: 'GB',
+  Polen: 'PL',
+  Poland: 'PL',
+};
+
+export function getCountryCode(country) {
+  if (country) {
+    return `${countryToCode[country]}–`;
+  } else {
+    return '';
+  }
+}
+
 export const saveImagesAsBlob = async (hotels) => {
   for (const hotel of hotels) {
     if (hotel.titlepicture) {
