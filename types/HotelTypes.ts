@@ -1,4 +1,4 @@
-interface IProperties {
+export interface IProperties {
   name: string;
   description: string;
   price: string;
