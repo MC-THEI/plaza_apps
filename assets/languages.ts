@@ -73,3 +73,8 @@ export const ourOfferTitle: TitleTypes = {
   1: { mainTitle: 'Unser Angebot', subTitle: 'für Sie' },
   2: { mainTitle: 'Our Offer', subTitle: 'for you' },
 };
+
+export const toHotel: TitleTypes = {
+  1: { mainTitle: 'Zum', subTitle: 'Hotel' },
+  2: { mainTitle: 'To the', subTitle: 'Hotel' },
+};
