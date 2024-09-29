@@ -4,14 +4,14 @@ export const offersSlice = createSlice({
   name: 'offers',
   initialState: {
     offers: [],
-    currentOffer: null,
+    currentOfferId: null,
   },
   reducers: {
     addOffers: (state, action) => {
       state.offers = action.payload;
     },
     setCurrentOffer: (state, action) => {
-      state.currentOffer = action.payload;
+      state.currentOfferId = action.payload;
     },
   },
 });

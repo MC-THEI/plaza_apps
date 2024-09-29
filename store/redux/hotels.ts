@@ -4,7 +4,7 @@ export const hotelsSlice = createSlice({
   name: 'hotels',
   initialState: {
     hotels: [],
-    currentHotel: null,
+    currentHotelId: null,
   },
   reducers: {
     addHotels: (state, action) => {
@@ -12,7 +12,7 @@ export const hotelsSlice = createSlice({
     },
 
     setCurrentHotel: (state, action) => {
-      state.currentHotel = action.payload;
+      state.currentHotelId = action.payload;
     },
   },
 });
