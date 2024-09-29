@@ -6,6 +6,7 @@ import OfferDescription from '../components/Offer/OfferDescription';
 import SubTitle from '../components/Offer/SubTitle';
 import OfferHero from '../components/Offer/OfferHero';
 import OfferPeriod from '../components/Offer/OfferPeriod';
+import ToHotel from '../components/Offer/ToHotel';
 
 function OfferScreen() {
   return (
@@ -17,6 +18,7 @@ function OfferScreen() {
         <OfferDescription />
         <ContactButtons />
         <OfferPeriod />
+        <ToHotel />
       </View>
     </ScreenScrollableWrapper>
   );
