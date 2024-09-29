@@ -29,7 +29,9 @@ function HotelHero() {
         style={styles.logo}
         source={{ uri: 'https://placehold.co/50.png' }}
       />
-      <FavoriteIcon style={{}} />
+      <View style={styles.favoriteIcon}>
+        <FavoriteIcon size={30} />
+      </View>
       <HotelMenuButtons />
     </ScreenHeader>
   );
@@ -45,5 +47,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 50,
     left: 20,
+  },
+  favoriteIcon: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
   },
 });
