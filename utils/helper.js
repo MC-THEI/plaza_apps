@@ -1,3 +1,6 @@
+import { HOST } from '../constants/constants';
+import { Alert, Linking } from 'react-native';
+
 const Font = require('expo-font');
 export const loadFonts = () =>
   Font.loadAsync({
@@ -9,6 +12,18 @@ export const loadFonts = () =>
     IcoMoon_pwai: require('../assets/fonts/icomoon/pwai/PLAZA-PWA.ttf'),
     IcoMoon_mci: require('../assets/fonts/icomoon/mci/plazahotels.ttf'),
   });
+
+export function getFullImageUrl(imagePath) {
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    return imagePath;
+  }
+
+  if (imagePath.startsWith('/')) {
+    return `${HOST}${imagePath}`;
+  }
+
+  return imagePath;
+}
 
 export const countryToCode = {
   Deutschland: 'DE',
@@ -36,6 +51,42 @@ export function getCountryCode(country) {
     return `${countryToCode[country]}–`;
   } else {
     return '';
+  }
+}
+
+export function getCurrentObject(objects, currentId) {
+  return objects.find((obj) => obj.id === currentId);
+}
+
+export function splitLastWord(text) {
+  if (typeof text !== 'string' || text.trim() === '') {
+    return { lastWord: '', restOfText: '' };
+  }
+
+  const trimmedText = text.trim();
+  const words = trimmedText.split(' ');
+  const lastWord = words.pop();
+  const restOfText = words.join(' ');
+
+  return {
+    lastWord,
+    restOfText,
+  };
+}
+
+export async function sendEmail(url) {
+  const mailTo = `mailto:${url}`;
+
+  try {
+    const supported = await Linking.canOpenURL(mailTo);
+    if (!supported) {
+      Alert.alert('Error', 'Email is not available');
+      return;
+    }
+
+    await Linking.openURL(mailTo);
+  } catch (err) {
+    console.log(err);
   }
 }
 
