@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList } from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 import Card from './Card';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationTypes } from '../types/NavigationTypes';
@@ -7,6 +7,8 @@ import { IOffer } from '../types/OfferTypes';
 import { useAppDispatch } from '../store/redux/store';
 import { setCurrentHotel } from '../store/redux/hotels';
 import { setCurrentOffer } from '../store/redux/offers';
+import { useMemo, useCallback } from 'react';
+import React from 'react';
 
 function Cards({
   cardType,
@@ -18,31 +20,47 @@ function Cards({
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
 
-  function handleClick(id: number) {
-    if (cardType === NavigationTypes.Hotel)
-      navigation.navigate(NavigationTypes.Hotel);
-    dispatch(setCurrentHotel(id));
+  const handleClick = useCallback(
+    (id: number) => {
+      if (cardType === NavigationTypes.Hotel) {
+        (navigation.navigate as (routeName: string) => void)(
+          NavigationTypes.Hotel
+        );
+        dispatch(setCurrentHotel(id));
+      } else if (cardType === NavigationTypes.Offer) {
+        (navigation.navigate as (routeName: string) => void)(
+          NavigationTypes.Offer
+        );
+        dispatch(setCurrentOffer(id));
+      }
+    },
+    [cardType, dispatch, navigation]
+  );
 
-    if (cardType === NavigationTypes.Offer)
-      navigation.navigate(NavigationTypes.Offer);
-    dispatch(setCurrentOffer(id));
-  }
+  const renderItem = useMemo(
+    () =>
+      ({ item }: { item: IHotel | IOffer }) => (
+        <Card
+          cardType={cardType}
+          cardData={item}
+          onPress={() => {
+            handleClick(item.id);
+          }}
+        />
+      ),
+    [cardType, handleClick]
+  );
 
-  const renderItem = ({ item }: { item: IHotel | IOffer }) => (
-    <Card
-      cardType={cardType}
-      cardData={item}
-      onPress={() => {
-        handleClick(item.id);
-      }}
-    />
+  const keyExtractor = useCallback(
+    (item: IHotel | IOffer) => item.id.toString(),
+    []
   );
 
   return (
     <FlatList
       data={cardData}
       renderItem={renderItem}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={keyExtractor}
       horizontal={true}
       style={styles.container}
       showsHorizontalScrollIndicator={false}
@@ -51,7 +69,7 @@ function Cards({
   );
 }
 
-export default Cards;
+export default React.memo(Cards);
 
 const styles = StyleSheet.create({
   container: {
