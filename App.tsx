@@ -44,7 +44,7 @@ function HomeStackNavigator() {
       screenOptions={{
         headerShown: false,
         animation: 'fade',
-        animationDuration: 150,
+        animationDuration: 100,
       }}
     >
       <Stack.Screen
@@ -144,8 +144,8 @@ function Root() {
     const offersJSON = await getDataFromDb('offers');
 
     if (hotelsJSON && offersJSON) {
-      const hotels = JSON.parse(hotelsJSON[0].hotels);
-      const offers = JSON.parse(offersJSON[0].offers);
+      const hotels = await JSON.parse(hotelsJSON[0].hotels);
+      const offers = await JSON.parse(offersJSON[0].offers);
       dispatch(addHotels(hotels));
       dispatch(addOffers(offers));
     }
@@ -165,14 +165,14 @@ function Root() {
           await clearTable('offers');
           await insertData(fetchedOffersData as IOffer[], 'offers');
 
-          setData();
+          await setData();
         } catch (error) {
           console.error('Error saving new data:', error);
         }
       } else if (!fetchedHotelsData && !fetchedOffersData) {
         setDbLoading(true);
         try {
-          setData();
+          await setData();
         } catch (error) {
           console.error(error);
         } finally {
