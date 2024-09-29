@@ -12,7 +12,7 @@ function AccordionItem({
   children,
   viewKey,
   duration = 250,
-  minVisibleHeight = 40, // The height corresponding to 2 visible lines
+  minVisibleHeight = 50, // The height corresponding to 2 visible lines
 }: {
   isExpanded: boolean;
   children: React.ReactNode;
@@ -22,15 +22,12 @@ function AccordionItem({
 }) {
   const [contentHeight, setContentHeight] = useState(0);
 
-  // Shared value for the content height animation
   const accordionHeight = useSharedValue(
     isExpanded ? contentHeight : minVisibleHeight
   );
 
-  // Shared value for the gradient height animation
   const gradientHeight = useSharedValue(isExpanded ? 0 : 30);
 
-  // Update the animation when the isExpanded value changes
   React.useEffect(() => {
     accordionHeight.value = withTiming(
       isExpanded ? contentHeight : minVisibleHeight,
@@ -39,12 +36,10 @@ function AccordionItem({
     gradientHeight.value = withTiming(isExpanded ? 0 : 30, { duration });
   }, [isExpanded, contentHeight]);
 
-  // Animated style for the accordion height
   const accHeight = useAnimatedStyle(() => ({
     height: accordionHeight.value,
   }));
 
-  // Animated style for the gradient height
   const animatedGradient = useAnimatedStyle(() => ({
     height: gradientHeight.value,
   }));
