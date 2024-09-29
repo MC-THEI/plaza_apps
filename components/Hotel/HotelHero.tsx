@@ -1,15 +1,23 @@
 import ScreenHeader from '../../ui/ScreenHeader';
 import MainTitle from '../Home/MainTitle';
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import FavoriteIcon from '../../ui/FavoriteIcon';
 import HotelMenuButtons from './HotelMenuButtons';
+import useHotels from '../../hooks/useHotels';
+import { getCurrentObject, getFullImageUrl } from '../../utils/helper';
 
 function HotelHero() {
+  const { hotels, currentHotelId } = useHotels();
+  const currentHotel = getCurrentObject(hotels, currentHotelId);
+
+  const image =
+    currentHotel?.titlePicturePortrait !== '' &&
+    currentHotel?.titlePicturePortrait !== null
+      ? currentHotel?.titlePicturePortrait
+      : currentHotel?.titlePicture;
+
   return (
-    <ScreenHeader
-      bgImg={'https://preview.plazahotels.de/media/210_dz-komfort.jpg'}
-      isUrl={true}
-    >
+    <ScreenHeader bgImg={getFullImageUrl(image)} isUrl={true}>
       <MainTitle
         title={{
           mainTitle: 'Best Western Plus Plaza Berlin Kurfürstendamm',
