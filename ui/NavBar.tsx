@@ -25,7 +25,7 @@ function NavBar() {
   const navigation = useNavigation();
 
   function handleClickNavBtn(navName: NavigationTypes) {
-    navigation.navigate(navName);
+    (navigation.navigate as (routeName: string) => void)(navName);
   }
 
   function handleClickBack() {
