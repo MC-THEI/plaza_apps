@@ -12,7 +12,7 @@ function ScreenHeader({
   isUrl?: boolean;
   height?: number;
 }) {
-  const images = {
+  const images: { [key: string]: any } = {
     home: require('../assets/images/PLAZA_App_Home.png'),
     favorite: require('../assets/images/PLAZA_App_Favoriten.png'),
   };
@@ -20,7 +20,7 @@ function ScreenHeader({
   return (
     <LinearGradient colors={['#3d3d3d', '#3d3d3d']} style={{ height: height }}>
       <ImageBackground
-        source={isUrl ? { uri: bgImg } : images[bgImg]}
+        source={isUrl ? { uri: bgImg } : bgImg ? images[bgImg] : images.home}
         resizeMode="cover"
         style={{ height: height }}
         imageStyle={styles.backgroundImage}
