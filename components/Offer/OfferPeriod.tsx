@@ -1,16 +1,28 @@
-import { View, StyleSheet, Text, Pressable } from 'react-native';
+import { View, StyleSheet, Text, Pressable, Linking } from 'react-native';
 import SectionWrapper from '../../ui/SectionWrapper';
 import { GlobalStyles } from '../../constants/styles';
+import { getCurrentObject } from '../../utils/helper';
+import useOffers from '../../hooks/useOffers';
 
 function OfferPeriod() {
+  const { currentOfferId, offers } = useOffers();
+  const currentOffer = getCurrentObject(offers, currentOfferId);
+
   return (
     <SectionWrapper bgColor={'light'}>
       <View style={styles.container}>
-        <Text style={[styles.text, styles.textBold]}>Angebotszeitraum</Text>
-        <Text style={styles.text}>27.09.2024 - 31.12.2024</Text>
+        <Text style={[styles.text, styles.textBold]}>
+          {currentOffer?.info.validPeriodTitle}
+        </Text>
+        <Text style={styles.text}>
+          {currentOffer?.info.validFrom} – {currentOffer?.info.validTo}
+        </Text>
         <View style={styles.buttonContainer}>
-          <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>Verfügbarkeit prüfen</Text>
+          <Pressable
+            style={styles.button}
+            onPress={() => Linking.openURL(currentOffer?.wbe.link ?? '')}
+          >
+            <Text style={styles.buttonText}>{currentOffer?.wbe.linkTitle}</Text>
           </Pressable>
         </View>
       </View>
