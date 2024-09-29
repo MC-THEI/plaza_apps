@@ -1,11 +1,17 @@
 import ScreenHeader from '../../ui/ScreenHeader';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet, Image, View } from 'react-native';
 import MainTitle from '../Home/MainTitle';
+import { getCurrentObject, getFullImageUrl } from '../../utils/helper';
+import useOffers from '../../hooks/useOffers';
+import FavoriteIcon from '../../ui/FavoriteIcon';
 
 function OfferHero() {
+  const { currentOfferId, offers } = useOffers();
+  const currentOffer = getCurrentObject(offers, currentOfferId);
+
   return (
     <ScreenHeader
-      bgImg={'https://preview.plazahotels.de/media/210_dz-komfort.jpg'}
+      bgImg={getFullImageUrl(currentOffer?.titlePicture)}
       isUrl={true}
       height={400}
     >
@@ -15,9 +21,12 @@ function OfferHero() {
       />
 
       <MainTitle
-        title={{ mainTitle: 'Plaza Weekend Angebot' }}
+        title={{ mainTitle: currentOffer?.name }}
         height={{ height: '60%' }}
       />
+      <View style={styles.favoriteIcon}>
+        <FavoriteIcon size={30} />
+      </View>
     </ScreenHeader>
   );
 }
@@ -32,5 +41,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 50,
     left: 20,
+  },
+  favoriteIcon: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
   },
 });
