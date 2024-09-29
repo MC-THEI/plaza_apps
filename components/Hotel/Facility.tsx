@@ -2,11 +2,11 @@ import { View, StyleSheet, Text } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import { IcoMoon_mci } from '../../ui/IcoMoon';
 
-function Facility() {
+function Facility({ facility }: { facility: { icomoon_key: string } }) {
   return (
     <View style={styles.container}>
       <IcoMoon_mci
-        name={'info'}
+        name={facility.icomoon_key}
         color={GlobalStyles.colors.accentGold}
         size={22}
       />
