@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   icon: {
-    color: GlobalStyles.colors.accentGold,
+    color: GlobalStyles.colors.neutralWhite,
     textAlign: 'center',
   },
 });
