@@ -6,15 +6,15 @@ function MainTitle({
   fontSize,
   height,
 }: {
-  title: { mainTitle: string; subTitle?: string };
+  title?: { mainTitle?: string; subTitle?: string };
   fontSize?: {};
   height?: {};
 }) {
   return (
     <View style={[styles.titleContainer, height]}>
       <Text style={[styles.title, fontSize]}>
-        {title.mainTitle}
-        <Text style={styles.subTitle}> {title.subTitle}</Text>
+        {title?.mainTitle}
+        <Text style={styles.subTitle}> {title?.subTitle}</Text>
       </Text>
     </View>
   );
