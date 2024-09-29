@@ -1,12 +1,20 @@
 import InformationCard from './InformationCard';
 import { View, StyleSheet } from 'react-native';
+import useHotels from '../../hooks/useHotels';
+import { IHotel } from '../../types/HotelTypes';
+import { getCurrentObject } from '../../utils/helper';
 
 function InformationCards() {
+  const { hotels, currentHotelId } = useHotels();
+  const currentHotel: IHotel = getCurrentObject(hotels, currentHotelId);
+
+  const properties = Object.values(currentHotel.properties);
+
   return (
     <View style={styles.container}>
-      <InformationCard />
-      <InformationCard />
-      <InformationCard />
+      {properties.map((property) => (
+        <InformationCard property={property} key={property.name} />
+      ))}
     </View>
   );
 }

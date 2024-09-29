@@ -1,32 +1,68 @@
 import { View, StyleSheet, Text, Platform, Dimensions } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import { IcoMoon_mci, IcoMoon_pwai } from '../../ui/IcoMoon';
+import { IProperties } from '../../types/HotelTypes';
 
 const deviceWidth = Dimensions.get('window').width;
 
-function InformationCard() {
+function InformationCard({ property }: { property: IProperties }) {
+  let icon = '';
+
+  switch (property.name.toLowerCase()) {
+    case 'frühstück':
+      icon = 'breakfast';
+      break;
+    case 'breakfast':
+      icon = 'breakfast';
+      break;
+    case 'sauna':
+      icon = 'sauna';
+      break;
+    case 'hunde':
+      icon = 'pets';
+      break;
+    case 'dogs':
+      icon = 'pets';
+      break;
+    case 'parken':
+      icon = 'parking';
+      break;
+    case 'parking':
+      icon = 'parking';
+      break;
+    case 'garage':
+      icon = 'parking';
+      break;
+  }
+
+  const infoTab = property.description !== '' && (
+    <View style={styles.infoContainer}>
+      <IcoMoon_pwai
+        name={'info'}
+        color={GlobalStyles.colors.neutralGray_dark}
+        style={styles.infoIcon}
+        size={16}
+      />
+    </View>
+  );
+
   return (
     <View style={[styles.container, styles.shadow]}>
-      <View style={styles.infoContainer}>
-        <IcoMoon_pwai
-          name={'info'}
-          color={GlobalStyles.colors.neutralGray_dark}
-          style={styles.infoIcon}
-          size={16}
-        />
-      </View>
+      {infoTab}
       <View>
         <IcoMoon_mci
-          name={'breakfast'}
+          name={icon}
           color={GlobalStyles.colors.neutralGray_dark}
           size={25}
         />
       </View>
       <View>
-        <Text style={[styles.text, styles.textBold]}>Frühstück</Text>
+        <Text style={[styles.text, styles.textBold]}>{property.name}</Text>
       </View>
       <View>
-        <Text style={styles.text}>10.00/Tag</Text>
+        <Text style={styles.text}>
+          {property.price} {property.quantityBaseText}
+        </Text>
       </View>
     </View>
   );
