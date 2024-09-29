@@ -10,7 +10,7 @@ function ContactButton({
 }: {
   iconType: string;
   iconName: string;
-  data: string;
+  data: string | JSX.Element | number | undefined;
   onPress: () => void;
 }) {
   const mci = iconType === 'mci';
@@ -55,5 +55,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'lato-v16-latin-700',
+    fontSize: 16,
   },
 });
