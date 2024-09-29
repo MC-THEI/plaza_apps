@@ -16,7 +16,7 @@ export const GlobalStyles = {
   fontSize: {
     titleFontSize: deviceWidth > 500 ? 60 : 37,
     mainButtonFontSize: 16,
-    cardFontSize: 16,
+    cardFontSize: 17,
     sectionTitleFontSize: 18,
     listFontSize: 14,
     offerPeriodFontSize: 18,
