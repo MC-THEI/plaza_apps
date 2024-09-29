@@ -70,7 +70,7 @@ function Map() {
             radius: 40.0,
           }}
         />
-
+        {/* */}
         <ShapeSource
           id="objects"
           cluster={true}

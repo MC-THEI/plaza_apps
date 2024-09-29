@@ -1,5 +1,6 @@
 import { FlatList, View, StyleSheet, Dimensions } from 'react-native';
 import ListItem from '../../ui/List/ListItem';
+import { useCallback } from 'react';
 
 const dummyData = [
   { id: 0 },
@@ -10,15 +11,18 @@ const dummyData = [
   { id: 6 },
   { id: 7 },
 ];
+
 const screenHeight = Dimensions.get('window').height;
 const finalHeight = screenHeight * 0.6 - 110;
 
 function MapList() {
-  function renderItem({ item, index }: { item: any; index: number }) {
-    const bgColor = index % 2 === 0 ? 'light' : 'dark';
-
-    return <ListItem bgColor={bgColor} data={item} key={item.id} />;
-  }
+  const renderItem = useCallback(
+    ({ item, index }: { item: any; index: number }) => {
+      const bgColor = index % 2 === 0 ? 'light' : 'dark';
+      return <ListItem bgColor={bgColor} data={item} key={item.id} />;
+    },
+    []
+  );
 
   return (
     <View style={styles.container}>
