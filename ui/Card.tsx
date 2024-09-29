@@ -13,50 +13,78 @@ import { IHotel } from '../types/HotelTypes';
 import { IOffer } from '../types/OfferTypes';
 import { NavigationTypes } from '../types/NavigationTypes';
 import { IcoMoon_pwai } from './IcoMoon';
-import { getCountryCode } from '../utils/helper';
-import { useAppSelector } from '../store/redux/store';
+import {
+  getCountryCode,
+  getCurrentObject,
+  getFullImageUrl,
+} from '../utils/helper';
+import useHotels from '../hooks/useHotels';
+import React from 'react';
 
 function Card({
   cardType,
   cardData,
   onPress,
+  fullSize,
 }: {
   cardType: string;
   cardData: IHotel | IOffer;
   onPress: () => void;
+  fullSize?: boolean;
 }) {
-  function handlePressCard() {
-    onPress();
-  }
-
-  const { hotels } = useAppSelector((state) => state.hotels);
+  const { hotels } = useHotels();
 
   const offerHotel = useMemo(() => {
     if (cardType === NavigationTypes.Offer) {
-      return hotels.find(
-        (hotel) => (hotel as IHotel).id === (cardData as IOffer).hotel.id
-      );
+      return getCurrentObject(hotels, (cardData as IOffer).hotel.id);
     }
     return null;
   }, [cardType, cardData, hotels]);
 
   const hotelCard = cardType === NavigationTypes.Hotel;
 
-  const cardLocation = (
-    <Text style={styles.locationText}>
-      {hotelCard ? cardData.location?.city : offerHotel.location?.city}
-    </Text>
+  const cardLocation = useMemo(
+    () => (
+      <Text style={styles.locationText}>
+        {hotelCard ? cardData.location?.city : offerHotel?.location?.city}
+      </Text>
+    ),
+    [hotelCard, cardData, offerHotel]
   );
 
-  const countryCode = getCountryCode(
-    hotelCard ? cardData.location?.country : offerHotel.location?.country
+  const countryCode = useMemo(
+    () =>
+      getCountryCode(
+        hotelCard ? cardData.location?.country : offerHotel?.location?.country
+      ),
+    [hotelCard, cardData, offerHotel]
   );
 
-  console.log(cardData);
+  const cardImage = useMemo(
+    () =>
+      cardData.titlePicture !== '' &&
+      cardData.titlePicture !== null &&
+      cardData.titlePicture
+        ? { uri: getFullImageUrl(cardData.titlePicture) }
+        : require('../assets/images/fallbacks/4_3-image-fallback.png'),
+    [cardData]
+  );
+
+  function handlePressCard() {
+    onPress();
+  }
 
   return (
-    <Pressable style={styles.container} onPress={() => handlePressCard()}>
-      <ImageBackground>
+    <Pressable
+      style={[styles.container, fullSize && styles.fullSize]}
+      onPress={handlePressCard}
+    >
+      <ImageBackground
+        style={styles.innerContainer}
+        source={cardImage}
+        resizeMode="cover"
+        imageStyle={styles.backgroundImage}
+      >
         <View style={styles.iconLogoContainer}>
           <Image
             style={styles.iconLogo}
@@ -80,8 +108,7 @@ function Card({
               color={GlobalStyles.colors.neutralGray_dark}
             />
             <Text style={styles.locationText}>
-              {countryCode}
-              <Text style={styles.locationText}>{cardLocation}</Text>
+              {countryCode} {cardLocation}
             </Text>
           </View>
         </View>
@@ -93,16 +120,16 @@ function Card({
   );
 }
 
-export default Card;
+export default React.memo(Card);
+
+let cardWidth = 280;
+const aspectRatio = 170 / 280;
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    backgroundColor: GlobalStyles.colors.accentGold,
-    height: 170,
-    width: 280,
-    borderRadius: 10,
+    height: cardWidth * aspectRatio,
+    width: cardWidth,
     marginRight: 15,
     shadowColor: GlobalStyles.colors.neutralGray_dark,
     shadowOffset: {
@@ -111,6 +138,16 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 6,
     shadowOpacity: 0.25,
+  },
+  innerContainer: {
+    backgroundColor: GlobalStyles.colors.neutralGray_dark,
+    flex: 1,
+    justifyContent: 'space-between',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  backgroundImage: {
+    opacity: 0.35,
   },
   iconLogoContainer: {
     flexDirection: 'row',
@@ -128,6 +165,8 @@ const styles = StyleSheet.create({
   locationIcon: {
     marginRight: 5,
     marginTop: 3,
+    color: GlobalStyles.colors.accentGold,
+    fontSize: 15,
   },
   hotelNameText: {
     fontFamily: 'lato-v16-latin-700',
@@ -136,6 +175,8 @@ const styles = StyleSheet.create({
   },
   locationText: {
     fontFamily: 'lato-v16-latin-700',
+    color: GlobalStyles.colors.accentGold,
+    fontSize: GlobalStyles.fontSize.cardFontSize,
   },
   iconLogo: {
     width: 35,
@@ -148,5 +189,9 @@ const styles = StyleSheet.create({
     height: 35,
     borderBottomRightRadius: 6,
     borderBottomLeftRadius: 6,
+  },
+  fullSize: {
+    width: '100%',
+    height: 200,
   },
 });
