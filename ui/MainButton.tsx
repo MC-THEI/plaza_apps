@@ -1,7 +1,7 @@
 import { Pressable, Text, StyleSheet, View } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 
-function MainButton({ title }: { title: string }) {
+function MainButton({ title }: { title?: string }) {
   return (
     <View style={[styles.buttonOuterContainer, { overflow: 'hidden' }]}>
       <Pressable style={(pressed) => [styles.buttonInnerContainer]}>
