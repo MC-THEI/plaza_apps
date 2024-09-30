@@ -16,31 +16,6 @@ function ContactButtons() {
   const currentOffer = getCurrentObject(offers, currentOfferId);
   const offerHotel = getCurrentObject(hotels, currentOffer?.hotel.id);
 
-  /*
-const makePhoneCall = (phoneNumber: string) => {
-  let phoneUrl = `tel:${phoneNumber}`;
-
-  Linking.canOpenURL(phoneUrl)
-    .then((supported) => {
-      if (!supported) {
-        Alert.alert('Error', 'Phone number is not available');
-      } else {
-        return Linking.openURL(phoneUrl);
-      }
-    })
-    .catch((err) => console.error('An error occurred', err));
-};
-
-
-const sendEmail = () => {
-  openComposer({
-    to: 'support@example.com',
-    subject: 'I have a question',
-    body: 'Hi, can you help me with...',
-  });
-};
-*/
-
   const dispatch = useAppDispatch();
   function handlePressMap() {
     (navigation.navigate as (routeName: string) => void)(NavigationTypes.Map);
