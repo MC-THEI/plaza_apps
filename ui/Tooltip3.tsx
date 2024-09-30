@@ -26,20 +26,32 @@ const Tooltip = ({
 
   useEffect(() => {
     if (visible && anchorRef.current) {
-      anchorRef.current.measure((x, y, width, height, pageX, pageY) => {
-        // Berechnung der Position
-        const newTop = pageY - 10; // Tooltip 10 Pixel über dem Button
-        const newLeft = pageX + width / 2 - 125; // Tooltip zentriert über dem Button (125 ist die Hälfte von 250)
+      anchorRef.current.measure(
+        (
+          x: number,
+          y: number,
+          width: number,
+          height: number,
+          pageX: number,
+          pageY: number
+        ) => {
+          // Berechnung der Position
+          const newTop = pageY - 50;
+          const newLeft = (screenWidth - 170) / 2;
 
-        // Grenzen überprüfen
-        const adjustedTop = Math.max(0, Math.min(newTop, screenHeight - 100)); // Tooltip muss im sichtbaren Bereich bleiben
-        const adjustedLeft = Math.max(0, Math.min(newLeft, screenWidth - 250)); // Tooltip muss im sichtbaren Bereich bleiben
+          // Grenzen überprüfen
+          const adjustedTop = Math.max(0, Math.min(newTop, screenHeight - 100));
+          const adjustedLeft = Math.max(
+            0,
+            Math.min(newLeft, screenWidth - 170)
+          );
 
-        setTooltipPosition({
-          top: adjustedTop,
-          left: adjustedLeft,
-        });
-      });
+          setTooltipPosition({
+            top: adjustedTop,
+            left: adjustedLeft,
+          });
+        }
+      );
     }
   }, [visible, anchorRef]);
 
@@ -74,9 +86,9 @@ const styles = StyleSheet.create({
   tooltip: {
     position: 'absolute',
     padding: 10,
+    width: 170,
     borderRadius: 5,
     backgroundColor: GlobalStyles.colors.accentGold,
-    maxWidth: 250,
     alignItems: 'center',
   },
   tooltipText: {
