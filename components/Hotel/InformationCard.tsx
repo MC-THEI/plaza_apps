@@ -1,11 +1,22 @@
-import { View, StyleSheet, Text, Platform, Dimensions } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Platform,
+  Dimensions,
+  Pressable,
+} from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import { IcoMoon_mci, IcoMoon_pwai } from '../../ui/IcoMoon';
 import { IProperties } from '../../types/HotelTypes';
+import { useRef, useState } from 'react';
+import Tooltip from '../../ui/Tooltip';
 
 const deviceWidth = Dimensions.get('window').width;
 
 function InformationCard({ property }: { property: IProperties }) {
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const buttonRef = useRef(null);
   let icon = '';
 
   switch (property.name.toLowerCase()) {
@@ -33,17 +44,29 @@ function InformationCard({ property }: { property: IProperties }) {
     case 'garage':
       icon = 'parking';
       break;
+    case 'tiefgarage':
+      icon = 'parking';
+      break;
   }
 
   const infoTab = property.description !== '' && (
-    <View style={styles.infoContainer}>
+    <Pressable
+      ref={buttonRef}
+      style={styles.infoContainer}
+      onPress={() => setTooltipVisible(true)}
+    >
+      <Tooltip
+        visible={tooltipVisible}
+        text={property.description}
+        onClose={() => setTooltipVisible(false)}
+      />
       <IcoMoon_pwai
         name={'info'}
         color={GlobalStyles.colors.neutralGray_dark}
         style={styles.infoIcon}
         size={16}
       />
-    </View>
+    </Pressable>
   );
 
   return (
