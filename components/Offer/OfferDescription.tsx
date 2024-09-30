@@ -61,8 +61,10 @@ function OfferDescription() {
     </html>
   `;
 
-  return (
-    <SectionWrapper bgColor={'light'}>
+  console.log(currentOffer?.description);
+
+  const description = (
+    <View style={styles.container}>
       <View style={styles.headerContainer}>
         <SectionTitle title={ourOfferTitle[1]} />
         <IcoMoon_pwai
@@ -88,13 +90,19 @@ function OfferDescription() {
           />
         </View>
       </Accordion>
-    </SectionWrapper>
+    </View>
   );
+
+  return currentOffer?.description && description;
 }
 
 export default OfferDescription;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+    paddingVertical: 40,
+  },
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
