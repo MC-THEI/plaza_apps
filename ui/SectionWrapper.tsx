@@ -1,21 +1,25 @@
 import { View, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 
+let sectionCount = 0;
+
 function SectionWrapper({
   children,
-  bgColor,
+  padding,
 }: {
   children: React.ReactNode;
-  bgColor?: string;
   padding?: number;
 }) {
+  sectionCount += 1;
+  const isEven = sectionCount % 2 === 0;
+
   return (
     <View
       style={[
         styles.container,
         {
-          backgroundColor:
-            bgColor === 'dark' ? GlobalStyles.colors.neutralWhite : 'white',
+          backgroundColor: !isEven ? GlobalStyles.colors.neutralWhite : 'white',
+          paddingVertical: padding ? padding : 40,
         },
       ]}
     >
