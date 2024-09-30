@@ -3,21 +3,26 @@ import Facility from './Facility';
 import useHotels from '../../hooks/useHotels';
 import { IHotel } from '../../types/HotelTypes';
 import { getCurrentObject } from '../../utils/helper';
+import { useRef } from 'react';
 
 function FacilitiesContainer() {
   const { hotels, currentHotelId } = useHotels();
   const currentHotel: IHotel = getCurrentObject(hotels, currentHotelId);
-
-  console.log(currentHotel?.hopaProperties);
+  const buttonRef = useRef(null);
 
   return (
     <ScrollView
       style={styles.container}
       horizontal={true}
       showsHorizontalScrollIndicator={false}
+      ref={buttonRef}
     >
       {currentHotel?.hopaProperties.map((facility) => (
-        <Facility key={facility.description} facility={facility} />
+        <Facility
+          key={facility.description}
+          facility={facility}
+          buttonRef={buttonRef}
+        />
       ))}
     </ScrollView>
   );
