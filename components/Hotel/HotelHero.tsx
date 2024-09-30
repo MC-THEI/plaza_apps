@@ -20,7 +20,7 @@ function HotelHero() {
     <ScreenHeader bgImg={getFullImageUrl(image)} isUrl={true}>
       <MainTitle
         title={{
-          mainTitle: 'Best Western Plus Plaza Berlin Kurfürstendamm',
+          mainTitle: currentHotel?.name,
         }}
         fontSize={{ fontSize: 35 }}
         height={{ height: '60%' }}
