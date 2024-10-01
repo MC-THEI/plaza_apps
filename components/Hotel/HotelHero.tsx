@@ -5,6 +5,7 @@ import FavoriteIcon from '../../ui/FavoriteIcon';
 import HotelMenuButtons from './HotelMenuButtons';
 import useHotels from '../../hooks/useHotels';
 import { getCurrentObject, getFullImageUrl } from '../../utils/helper';
+import { NavigationTypes } from '../../types/NavigationTypes';
 
 function HotelHero() {
   const { hotels, currentHotelId } = useHotels();
@@ -30,7 +31,11 @@ function HotelHero() {
         source={{ uri: 'https://placehold.co/50.png' }}
       />
       <View style={styles.favoriteIcon}>
-        <FavoriteIcon size={30} />
+        <FavoriteIcon
+          size={30}
+          id={currentHotel.id}
+          favName={NavigationTypes.Hotel}
+        />
       </View>
       <HotelMenuButtons />
     </ScreenHeader>

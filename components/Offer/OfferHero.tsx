@@ -4,6 +4,7 @@ import MainTitle from '../Home/MainTitle';
 import { getCurrentObject, getFullImageUrl } from '../../utils/helper';
 import useOffers from '../../hooks/useOffers';
 import FavoriteIcon from '../../ui/FavoriteIcon';
+import { NavigationTypes } from '../../types/NavigationTypes';
 
 function OfferHero() {
   const { currentOfferId, offers } = useOffers();
@@ -25,7 +26,11 @@ function OfferHero() {
         height={{ height: '60%' }}
       />
       <View style={styles.favoriteIcon}>
-        <FavoriteIcon size={30} />
+        <FavoriteIcon
+          size={30}
+          id={currentOffer.id}
+          favName={NavigationTypes.Offer}
+        />
       </View>
     </ScreenHeader>
   );
