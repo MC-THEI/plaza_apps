@@ -22,7 +22,7 @@ import {
   OFFER_URL,
   OFFERS_URL,
 } from './constants/constants';
-import useFetchData from './services/getData';
+import useFetchData from './services/getDataFromApi';
 import { loadFonts } from './utils/helper';
 import { addHotels } from './store/redux/hotels';
 import { addOffers } from './store/redux/offers';
@@ -34,6 +34,7 @@ import {
   getDataFromDb,
   insertData,
 } from './store/database';
+import { getData, getDataAsync } from './store/redux/favorites';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -155,6 +156,8 @@ function Root() {
     const init = async () => {
       if (fetchedHotelsData && fetchedOffersData) {
         try {
+          dispatch(getDataAsync());
+
           // hotels
           await createTable('hotels');
           await clearTable('hotels');
@@ -194,9 +197,6 @@ function Root() {
     }
     loadAllFonts();
   }, [fetchedHotelsData, fetchedOffersData]);
-
-  const areHotel = fetchedHotelsData && fetchedHotelsData.length > 0;
-  const areOffers = fetchedOffersData && fetchedOffersData.length > 0;
 
   if (!fontsLoaded || hotelsLoading || offersLoading || dbLoading) {
     return (
