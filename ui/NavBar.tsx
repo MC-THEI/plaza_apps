@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NavigationTypes } from '../types/NavigationTypes';
 import { IcoMoon_mci, IcoMoon_pwai } from './IcoMoon';
 import FavoriteIcon from './FavoriteIcon';
+import useFavorites from '../hooks/useFavorites';
 
 function NavBtn({
   BtnName,
@@ -23,6 +24,10 @@ function NavBtn({
 
 function NavBar() {
   const navigation = useNavigation();
+  const { favoritesOfferIds, favoritesHotelIds } = useFavorites();
+
+  const areFavorites =
+    favoritesOfferIds.length > 0 || favoritesHotelIds.length > 0;
 
   function handleClickNavBtn(navName: NavigationTypes) {
     (navigation.navigate as (routeName: string) => void)(navName);
@@ -56,7 +61,11 @@ function NavBar() {
         BtnName="Favorites"
         onPress={() => handleClickNavBtn(NavigationTypes.Favorite)}
       >
-        <FavoriteIcon size={22} />
+        <IcoMoon_pwai
+          name={areFavorites ? 'heart' : 'heart-contour'}
+          size={22}
+          color={GlobalStyles.colors.accentRed}
+        />
       </NavBtn>
       <NavBtn
         BtnName="Map"
