@@ -58,6 +58,10 @@ export function getCurrentObject(objects, currentId) {
   return objects.find((obj) => obj.id === currentId);
 }
 
+export function filterObjectsByIds(objects, currentIds) {
+  return objects.filter((hotels) => currentIds.includes(hotels.id));
+}
+
 export function splitLastWord(text) {
   if (typeof text !== 'string' || text.trim() === '') {
     return { lastWord: '', restOfText: '' };
