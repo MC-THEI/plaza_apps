@@ -70,6 +70,9 @@ function Card({
     [cardData]
   );
 
+  const favName = cardType === NavigationTypes.Hotel ? 'Hotel' : 'Offer';
+  const facIcon = <FavoriteIcon size={26} id={cardData.id} favName={favName} />;
+
   function handlePressCard() {
     onPress();
   }
@@ -112,9 +115,7 @@ function Card({
             </Text>
           </View>
         </View>
-        <View style={styles.iconLogoContainer}>
-          <FavoriteIcon size={26} />
-        </View>
+        <View style={styles.iconLogoContainer}>{facIcon}</View>
       </ImageBackground>
     </Pressable>
   );
