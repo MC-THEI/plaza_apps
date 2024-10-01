@@ -1,11 +1,32 @@
 import { Pressable, Text, StyleSheet, View } from 'react-native';
 import { GlobalStyles } from '../constants/styles';
 
-function MainButton({ title }: { title?: string }) {
+function MainButton({
+  title,
+  onPress,
+  inverted,
+}: {
+  title?: string;
+  onPress?: () => void;
+  inverted?: boolean;
+}) {
   return (
     <View style={[styles.buttonOuterContainer, { overflow: 'hidden' }]}>
-      <Pressable style={(pressed) => [styles.buttonInnerContainer]}>
-        <Text style={styles.buttonText}>{title}</Text>
+      <Pressable
+        onPress={onPress}
+        style={(pressed) => [
+          styles.buttonInnerContainer,
+          inverted && styles.inverted,
+        ]}
+      >
+        <Text
+          style={[
+            styles.buttonText,
+            inverted && { color: GlobalStyles.colors.accentGold },
+          ]}
+        >
+          {title}
+        </Text>
       </Pressable>
     </View>
   );
@@ -36,5 +57,8 @@ const styles = StyleSheet.create({
   },
   pressed: {
     backgroundColor: GlobalStyles.colors.accentGold_pressed,
+  },
+  inverted: {
+    backgroundColor: GlobalStyles.colors.neutralGray_dark,
   },
 });
