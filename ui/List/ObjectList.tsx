@@ -4,15 +4,18 @@ import ListItem from './ListItem';
 import { useState } from 'react';
 import { IcoMoon_pwai } from '../IcoMoon';
 import { GlobalStyles } from '../../constants/styles';
+import { IHotel } from '../../types/HotelTypes';
+import { IOffer } from '../../types/OfferTypes';
 
-const data = [
-  { id: 1, name: 'Item 1' },
-  { id: 2, name: 'Item 2' },
-  { id: 3, name: 'Item 3' },
-  { id: 4, name: 'Item 4' },
-];
-
-function ObjectList({ children }: { children: React.ReactNode }) {
+function ObjectList({
+  children,
+  data,
+  listType,
+}: {
+  children: React.ReactNode;
+  data: IHotel[] | IOffer[];
+  listType: 'hotel' | 'offer';
+}) {
   const [openAccordion, setOpenAccordion] = useState(false);
   function handleClickOpenAccordion() {
     setOpenAccordion((prev) => !prev);
@@ -20,7 +23,7 @@ function ObjectList({ children }: { children: React.ReactNode }) {
 
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+      <View style={styles.innerContainer}>
         {children}
         <IcoMoon_pwai
           name="arrow-back"
@@ -39,7 +42,8 @@ function ObjectList({ children }: { children: React.ReactNode }) {
         {data.map((item, index) => (
           <ListItem
             key={item.id}
-            item={item}
+            item={item as IHotel | IOffer}
+            listType={listType as 'hotel' | 'offer'}
             bgColor={index % 2 === 0 ? 'light' : 'dark'}
           />
         ))}
@@ -54,6 +58,10 @@ const styles = StyleSheet.create({
   container: {
     gap: 3,
     paddingTop: 40,
+  },
+  innerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   icon: {
     color: GlobalStyles.colors.accentGold,
