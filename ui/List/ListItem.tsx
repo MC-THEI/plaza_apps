@@ -1,4 +1,11 @@
-import { Image, View, StyleSheet, Pressable, Text } from 'react-native';
+import {
+  Image,
+  View,
+  StyleSheet,
+  Pressable,
+  Text,
+  Platform,
+} from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import { IcoMoon_mci, IcoMoon_pwai } from '../IcoMoon';
 import FavoriteIcon from '../FavoriteIcon';
@@ -9,7 +16,13 @@ import {
   getCurrentObject,
   getFullImageUrl,
 } from '../../utils/helper';
-import useHotels from '../../hooks/useHotels';
+import useHotels from '../../hooks/getDataHooks/useHotels';
+import { NavigationTypes } from '../../types/NavigationTypes';
+import { useNavigation } from '@react-navigation/native';
+import { setCurrentHotel } from '../../store/redux/hotels';
+import { useAppDispatch } from '../../store/redux/store';
+import { setCurrentOffer } from '../../store/redux/offers';
+import { SEARCHTERMS } from '../../constants/constants';
 
 function ListItem({
   item,
@@ -18,27 +31,69 @@ function ListItem({
 }: {
   item: IHotel | IOffer;
   bgColor: string;
-  listType: 'hotel' | 'offer';
+  listType: NavigationTypes;
 }) {
+  const navigation = useNavigation();
+  const dispatch = useAppDispatch();
   const { hotels } = useHotels();
 
   const iconLogo =
-    listType === 'hotel' ? (
+    listType === NavigationTypes.Hotel ? (
       <Image source={{ uri: 'https://placehold.co/50.png' }} />
     ) : (
       <IcoMoon_pwai name={'gift'} color={'white'} size={16} />
     );
 
   const offerHotel =
-    listType === 'offer' && getCurrentObject(hotels, item.hotel?.id);
+    listType === NavigationTypes.Offer &&
+    getCurrentObject(hotels, (item as IOffer).hotel?.id);
 
   const city =
-    listType === 'hotel' ? item.location?.city : offerHotel.location?.city;
+    listType === NavigationTypes.Hotel
+      ? item.location?.city
+      : offerHotel.location?.city;
 
   const country =
-    listType === 'hotel'
+    listType === NavigationTypes.Hotel
       ? item.location?.country
       : offerHotel.location?.country;
+
+  function handlePress() {
+    if (listType === NavigationTypes.Hotel) {
+      dispatch(setCurrentHotel(item.id as number));
+      (navigation.navigate as (routeName: string) => void)(
+        NavigationTypes.Hotel
+      );
+    }
+    if (listType === NavigationTypes.Offer) {
+      dispatch(setCurrentOffer(item.id as number));
+      (navigation.navigate as (routeName: string) => void)(
+        NavigationTypes.Offer
+      );
+    }
+  }
+
+  function HighlightedText({ text }: { text: string }) {
+    const getHighlightedText = (text: string) => {
+      const words = text.split(' ');
+      return words.map((word, index) => {
+        const isHighlighted = SEARCHTERMS.some((term) =>
+          word.toLowerCase().includes(term.toLowerCase())
+        );
+
+        return (
+          <Text
+            key={index}
+            style={isHighlighted ? styles.highlight : styles.textName}
+          >
+            {word}{' '}
+          </Text>
+        );
+      });
+    };
+
+    return <Text style={styles.textName}>{getHighlightedText(text)}</Text>;
+  }
 
   return (
     <Pressable
@@ -49,11 +104,12 @@ function ListItem({
             bgColor === 'dark' ? GlobalStyles.colors.neutralWhite : 'white',
         },
       ]}
+      onPress={() => handlePress()}
     >
       <View
         style={[
           styles.iconContainer,
-          listType === 'offer' && styles.iconContainerOffer,
+          listType === NavigationTypes.Offer && styles.iconContainerOffer,
         ]}
       >
         {iconLogo}
@@ -70,7 +126,8 @@ function ListItem({
         </View>
         <View style={styles.textContainer}>
           <View>
-            <Text style={styles.textName}>{item.name}</Text>
+            {/*<Text style={styles.textName}>{item.name}</Text>*/}
+            <HighlightedText text={item.name} />
             <View style={styles.locationContainer}>
               <IcoMoon_mci
                 name="marker"
@@ -87,9 +144,14 @@ function ListItem({
       </View>
       <View style={styles.favBtnContainer}>
         <FavoriteIcon
-          size={20}
+          color={GlobalStyles.colors.accentGold}
+          size={23}
           id={item.id}
-          favName={listType === 'hotel' ? 'Hotel' : 'Offer'}
+          favName={
+            listType === NavigationTypes.Hotel
+              ? NavigationTypes.Hotel
+              : NavigationTypes.Offer
+          }
         />
       </View>
     </Pressable>
@@ -127,7 +189,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   imageContainer: {
-    width: 120,
+    width: '30%',
     height: '100%',
   },
 
@@ -136,11 +198,12 @@ const styles = StyleSheet.create({
     height: '97%',
   },
   textContainer: {
+    width: '60%',
     padding: 10,
     justifyContent: 'center',
   },
   textName: {
-    fontSize: GlobalStyles.fontSize.listFontSize,
+    fontSize: Platform.select({ ios: 13, android: 14 }),
     fontFamily: 'lato-v16-latin-700',
     textTransform: 'uppercase',
   },
@@ -153,10 +216,13 @@ const styles = StyleSheet.create({
   },
   favBtnContainer: {
     height: '100%',
-    width: 50,
+    width: '10%',
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingBottom: 10,
     paddingRight: 10,
+  },
+  highlight: {
+    color: GlobalStyles.colors.accentGold,
   },
 });
