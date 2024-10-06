@@ -78,3 +78,25 @@ export const toHotel: TitleTypes = {
   1: { mainTitle: 'Zum', subTitle: 'Hotel' },
   2: { mainTitle: 'To the', subTitle: 'Hotel' },
 };
+
+//MapScreen -----------------------------------------------------------------
+export const searchInputPlaceholder = {
+  1: 'Hotel suchen ...',
+  2: 'Search Hotels ...',
+};
+
+export const noResultsInfo = {
+  1: 'Keine Ergebnisse',
+  2: 'No results',
+};
+
+export const gpsAlert = {
+  1: {
+    title: 'Fehlende Berechtigung',
+    message: 'Der Zugriff auf den Standort wurde verweigert',
+  },
+  2: {
+    title: 'Missing Authorization',
+    message: 'Access to the location has been denied',
+  },
+};
