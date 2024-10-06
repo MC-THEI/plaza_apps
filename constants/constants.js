@@ -36,3 +36,19 @@ export const SEARCHTERMS_HOTELS = [
   'PLUS',
   'Premium',
 ];
+export const SEARCHTERMS = [
+  'weekend',
+  'angebot',
+  'bettgeflüster',
+  'genießen',
+  'wandern',
+  'wanndern & genießen',
+  'sommererlebnis',
+  'moonlight',
+  'PLAZA',
+  'INN',
+  'BEST',
+  'WESTERN',
+  'PLUS',
+  'Premium',
+];
