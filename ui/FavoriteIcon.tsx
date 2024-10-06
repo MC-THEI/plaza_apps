@@ -7,12 +7,15 @@ import {
   toggleFavoriteHotel,
   toggleFavoriteOffer,
 } from '../store/redux/favorites';
+import { NavigationTypes } from '../types/NavigationTypes';
 
 function FavoriteIcon({
   size,
   id,
   favName,
+  color = GlobalStyles.colors.accentRed,
 }: {
+  color?: string;
   size?: number;
   id: number;
   favName: string;
@@ -23,7 +26,7 @@ function FavoriteIcon({
 
   const dispatch = useAppDispatch();
 
-  const isHotelFav = favName === 'Hotel';
+  const isHotelFav = favName === NavigationTypes.Hotel;
   const favoriteIds = isHotelFav ? favoritesHotelIds : favoritesOfferIds;
   const isFavorite = favoriteIds.indexOf(id) !== -1;
 
@@ -47,11 +50,7 @@ function FavoriteIcon({
         />
       )}
       {!isFavorite && (
-        <IcoMoon_pwai
-          name="heart-contour"
-          size={size}
-          color={GlobalStyles.colors.accentRed}
-        />
+        <IcoMoon_pwai name="heart-contour" size={size} color={color} />
       )}
     </Pressable>
   );
