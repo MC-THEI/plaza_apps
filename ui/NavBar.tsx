@@ -3,15 +3,14 @@ import { GlobalStyles } from '../constants/styles';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationTypes } from '../types/NavigationTypes';
 import { IcoMoon_mci, IcoMoon_pwai } from './IcoMoon';
-import FavoriteIcon from './FavoriteIcon';
-import useFavorites from '../hooks/useFavorites';
+import useFavorites from '../hooks/getDataHooks/useFavorites';
+import { useAppDispatch } from '../store/redux/store';
+import { setSelectedMapList } from '../store/redux/map';
 
 function NavBtn({
-  BtnName,
   onPress,
   children,
 }: {
-  BtnName: string;
   onPress: () => void;
   children: React.ReactNode;
 }) {
@@ -23,6 +22,7 @@ function NavBtn({
 }
 
 function NavBar() {
+  const dispatch = useAppDispatch();
   const navigation = useNavigation();
   const { favoritesOfferIds, favoritesHotelIds } = useFavorites();
 
@@ -30,6 +30,7 @@ function NavBar() {
     favoritesOfferIds.length > 0 || favoritesHotelIds.length > 0;
 
   function handleClickNavBtn(navName: NavigationTypes) {
+    //dispatch(setSelectedMapList(NavigationTypes.Hotel));
     (navigation.navigate as (routeName: string) => void)(navName);
   }
 
@@ -39,10 +40,7 @@ function NavBar() {
 
   return (
     <View style={styles.container}>
-      <NavBtn
-        BtnName="Home"
-        onPress={() => handleClickNavBtn(NavigationTypes.Home)}
-      >
+      <NavBtn onPress={() => handleClickNavBtn(NavigationTypes.Home)}>
         <IcoMoon_pwai
           name="home"
           size={22}
@@ -50,34 +48,28 @@ function NavBar() {
         />
       </NavBtn>
 
-      <NavBtn BtnName="Back" onPress={() => handleClickBack()}>
+      <NavBtn onPress={() => handleClickBack()}>
         <IcoMoon_mci
           name="chevron-left"
           size={22}
           color={GlobalStyles.colors.accentGold}
         />
       </NavBtn>
-      <NavBtn
-        BtnName="Favorites"
-        onPress={() => handleClickNavBtn(NavigationTypes.Favorite)}
-      >
+      <NavBtn onPress={() => handleClickNavBtn(NavigationTypes.Favorite)}>
         <IcoMoon_pwai
           name={areFavorites ? 'heart' : 'heart-contour'}
           size={22}
           color={GlobalStyles.colors.accentRed}
         />
       </NavBtn>
-      <NavBtn
-        BtnName="Map"
-        onPress={() => handleClickNavBtn(NavigationTypes.Map)}
-      >
+      <NavBtn onPress={() => handleClickNavBtn(NavigationTypes.Map)}>
         <IcoMoon_pwai
           name="search"
           size={22}
           color={GlobalStyles.colors.accentGold}
         />
       </NavBtn>
-      <NavBtn BtnName="DE" onPress={() => {}}>
+      <NavBtn onPress={() => {}}>
         <Text style={styles.langButton}>DE</Text>
       </NavBtn>
     </View>
