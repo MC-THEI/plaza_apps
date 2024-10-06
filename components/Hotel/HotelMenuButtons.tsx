@@ -1,7 +1,7 @@
 import { Alert, Linking, StyleSheet, View } from 'react-native';
 import HotelMenuButton from './HotelMenuButton';
 import { hotelMenuButtonTitles } from '../../assets/languages';
-import useHotels from '../../hooks/useHotels';
+import useHotels from '../../hooks/getDataHooks/useHotels';
 import { getCurrentObject } from '../../utils/helper';
 import { IHotel } from '../../types/HotelTypes';
 import { NavigationTypes } from '../../types/NavigationTypes';

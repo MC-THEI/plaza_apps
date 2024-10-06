@@ -3,7 +3,7 @@ import SectionTitle from '../../ui/SectionTitle';
 import { ratingTitle } from '../../assets/languages';
 import { Text, View, StyleSheet } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
-import useHotels from '../../hooks/useHotels';
+import useHotels from '../../hooks/getDataHooks/useHotels';
 import { getCurrentObject } from '../../utils/helper';
 import { IHotel } from '../../types/HotelTypes';
 

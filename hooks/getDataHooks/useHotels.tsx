@@ -1,5 +1,5 @@
-import { useAppSelector } from '../store/redux/store';
-import { IHotel } from '../types/HotelTypes';
+import { useAppSelector } from '../../store/redux/store';
+import { IHotel } from '../../types/HotelTypes';
 
 const useHotels = () => {
   const {

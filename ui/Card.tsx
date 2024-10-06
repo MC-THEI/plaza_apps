@@ -18,7 +18,7 @@ import {
   getCurrentObject,
   getFullImageUrl,
 } from '../utils/helper';
-import useHotels from '../hooks/useHotels';
+import useHotels from '../hooks/getDataHooks/useHotels';
 import React from 'react';
 
 function Card({

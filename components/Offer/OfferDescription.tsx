@@ -7,7 +7,7 @@ import { GlobalStyles } from '../../constants/styles';
 import Accordion from '../../ui/Accordion';
 import { useState } from 'react';
 import { WebView } from 'react-native-webview';
-import useOffers from '../../hooks/useOffers';
+import useOffers from '../../hooks/getDataHooks/useOffers';
 import { getCurrentObject } from '../../utils/helper';
 
 function OfferDescription() {
@@ -60,8 +60,6 @@ function OfferDescription() {
       </body>
     </html>
   `;
-
-  console.log(currentOffer?.description);
 
   const description = (
     <View style={styles.container}>

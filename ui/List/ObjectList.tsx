@@ -6,6 +6,7 @@ import { IcoMoon_pwai } from '../IcoMoon';
 import { GlobalStyles } from '../../constants/styles';
 import { IHotel } from '../../types/HotelTypes';
 import { IOffer } from '../../types/OfferTypes';
+import { NavigationTypes } from '../../types/NavigationTypes';
 
 function ObjectList({
   children,
@@ -14,7 +15,7 @@ function ObjectList({
 }: {
   children: React.ReactNode;
   data: IHotel[] | IOffer[];
-  listType: 'hotel' | 'offer';
+  listType: NavigationTypes;
 }) {
   const [openAccordion, setOpenAccordion] = useState(false);
   function handleClickOpenAccordion() {
@@ -43,7 +44,7 @@ function ObjectList({
           <ListItem
             key={item.id}
             item={item as IHotel | IOffer}
-            listType={listType as 'hotel' | 'offer'}
+            listType={listType as NavigationTypes}
             bgColor={index % 2 === 0 ? 'light' : 'dark'}
           />
         ))}

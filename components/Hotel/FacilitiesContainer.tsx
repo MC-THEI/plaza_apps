@@ -1,6 +1,6 @@
 import { StyleSheet, ScrollView } from 'react-native';
 import Facility from './Facility';
-import useHotels from '../../hooks/useHotels';
+import useHotels from '../../hooks/getDataHooks/useHotels';
 import { IHotel } from '../../types/HotelTypes';
 import { getCurrentObject } from '../../utils/helper';
 import { useRef } from 'react';

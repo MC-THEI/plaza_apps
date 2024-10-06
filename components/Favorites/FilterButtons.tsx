@@ -6,7 +6,7 @@ import {
   toggleOffersFilter,
 } from '../../store/redux/favorites';
 import { useAppDispatch } from '../../store/redux/store';
-import useFavorites from '../../hooks/useFavorites';
+import useFavorites from '../../hooks/getDataHooks/useFavorites';
 
 function FilterButtons() {
   const dispatch = useAppDispatch();

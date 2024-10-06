@@ -3,7 +3,7 @@ import MainTitle from '../Home/MainTitle';
 import { Image, StyleSheet, View } from 'react-native';
 import FavoriteIcon from '../../ui/FavoriteIcon';
 import HotelMenuButtons from './HotelMenuButtons';
-import useHotels from '../../hooks/useHotels';
+import useHotels from '../../hooks/getDataHooks/useHotels';
 import { getCurrentObject, getFullImageUrl } from '../../utils/helper';
 import { NavigationTypes } from '../../types/NavigationTypes';
 

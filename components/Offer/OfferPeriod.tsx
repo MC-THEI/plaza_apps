@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, Pressable, Linking } from 'react-native';
 import SectionWrapper from '../../ui/SectionWrapper';
 import { GlobalStyles } from '../../constants/styles';
 import { getCurrentObject } from '../../utils/helper';
-import useOffers from '../../hooks/useOffers';
+import useOffers from '../../hooks/getDataHooks/useOffers';
 
 function OfferPeriod() {
   const { currentOfferId, offers } = useOffers();

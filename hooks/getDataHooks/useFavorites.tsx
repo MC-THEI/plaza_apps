@@ -1,4 +1,4 @@
-import { useAppSelector } from '../store/redux/store';
+import { useAppSelector } from '../../store/redux/store';
 
 const useFavorites = () => {
   const {

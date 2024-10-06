@@ -44,7 +44,7 @@ export interface IHotel {
     garage: IProperties;
     dogs: IProperties;
     fitness: IProperties;
-  };
+  }[];
 
   rating: {
     TotalParticipants: number;

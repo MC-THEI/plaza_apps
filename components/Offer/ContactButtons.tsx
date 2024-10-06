@@ -3,8 +3,8 @@ import { View, StyleSheet, Text, Linking, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationTypes } from '../../types/NavigationTypes';
 import { getCurrentObject, sendEmail } from '../../utils/helper';
-import useOffers from '../../hooks/useOffers';
-import useHotels from '../../hooks/useHotels';
+import useOffers from '../../hooks/getDataHooks/useOffers';
+import useHotels from '../../hooks/getDataHooks/useHotels';
 import { useAppDispatch } from '../../store/redux/store';
 import { setCameraPosition } from '../../store/redux/map';
 

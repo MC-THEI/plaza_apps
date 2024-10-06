@@ -2,7 +2,7 @@ import SectionTitle from '../../ui/SectionTitle';
 import { facilitiesTitle } from '../../assets/languages';
 import SectionWrapper from '../../ui/SectionWrapper';
 import FacilitiesContainer from './FacilitiesContainer';
-import useHotels from '../../hooks/useHotels';
+import useHotels from '../../hooks/getDataHooks/useHotels';
 import { IHotel } from '../../types/HotelTypes';
 import { getCurrentObject } from '../../utils/helper';
 

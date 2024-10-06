@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import MainButton from '../../ui/MainButton';
-import useOffers from '../../hooks/useOffers';
+import useOffers from '../../hooks/getDataHooks/useOffers';
 import { getCurrentObject } from '../../utils/helper';
 
 function PriceButton() {

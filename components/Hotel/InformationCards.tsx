@@ -1,6 +1,6 @@
 import InformationCard from './InformationCard';
 import { View, StyleSheet } from 'react-native';
-import useHotels from '../../hooks/useHotels';
+import useHotels from '../../hooks/getDataHooks/useHotels';
 import { IHotel } from '../../types/HotelTypes';
 import { getCurrentObject } from '../../utils/helper';
 

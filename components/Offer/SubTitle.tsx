@@ -1,8 +1,8 @@
 import { Text, View, StyleSheet, Dimensions } from 'react-native';
 import { GlobalStyles } from '../../constants/styles';
 import { getCurrentObject, splitLastWord } from '../../utils/helper';
-import useOffers from '../../hooks/useOffers';
-import useHotels from '../../hooks/useHotels';
+import useOffers from '../../hooks/getDataHooks/useOffers';
+import useHotels from '../../hooks/getDataHooks/useHotels';
 
 const deviceWidth = Dimensions.get('window').width;
 

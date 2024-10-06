@@ -2,7 +2,7 @@ import ScreenHeader from '../../ui/ScreenHeader';
 import { StyleSheet, Image, View } from 'react-native';
 import MainTitle from '../Home/MainTitle';
 import { getCurrentObject, getFullImageUrl } from '../../utils/helper';
-import useOffers from '../../hooks/useOffers';
+import useOffers from '../../hooks/getDataHooks/useOffers';
 import FavoriteIcon from '../../ui/FavoriteIcon';
 import { NavigationTypes } from '../../types/NavigationTypes';
 

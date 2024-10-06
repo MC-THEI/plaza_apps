@@ -8,8 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import { IHotel } from '../../types/HotelTypes';
 import { setCurrentHotel } from '../../store/redux/hotels';
 import { getCurrentObject } from '../../utils/helper';
-import useOffers from '../../hooks/useOffers';
-import useHotels from '../../hooks/useHotels';
+import useOffers from '../../hooks/getDataHooks/useOffers';
+import useHotels from '../../hooks/getDataHooks/useHotels';
 
 function ToHotel() {
   const { currentOfferId, offers } = useOffers();

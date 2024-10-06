@@ -1,5 +1,5 @@
-import { IOffer } from '../types/OfferTypes';
-import { useAppSelector } from '../store/redux/store';
+import { IOffer } from '../../types/OfferTypes';
+import { useAppSelector } from '../../store/redux/store';
 
 const useOffers = () => {
   const {

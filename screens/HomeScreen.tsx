@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import SearchButtons from '../components/Home/SearchButtons';
 import ScreenScrollableWrapper from '../ui/ScreenScrollableWrapper';
 import OffersSlider from '../components/Home/OffersSlider';

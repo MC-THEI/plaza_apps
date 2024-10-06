@@ -3,7 +3,7 @@ import {
   clearDataFromAsyncStorage,
   getMultipleDataFromAsyncStorage,
   storeMultipleDataInAsyncStorage,
-} from '../../services/setDataToAsynStorage';
+} from '../../services/setDataToAsyncStorage';
 
 export const storeDataAsync = createAsyncThunk(
   'favorites/setDataInAsyncStorage',

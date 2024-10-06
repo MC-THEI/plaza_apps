@@ -5,12 +5,13 @@ import {
   mainTitleHotelFavorites,
   mainTitleOfferFavorites,
 } from '../../assets/languages';
-import useFavorites from '../../hooks/useFavorites';
-import useHotels from '../../hooks/useHotels';
-import useOffers from '../../hooks/useOffers';
+import useFavorites from '../../hooks/getDataHooks/useFavorites';
+import useHotels from '../../hooks/getDataHooks/useHotels';
+import useOffers from '../../hooks/getDataHooks/useOffers';
 import { filterObjectsByIds } from '../../utils/helper';
 import { IOffer } from '../../types/OfferTypes';
 import { IHotel } from '../../types/HotelTypes';
+import { NavigationTypes } from '../../types/NavigationTypes';
 
 function FavoritesList() {
   const {
@@ -26,7 +27,7 @@ function FavoritesList() {
   const favOffers = filterObjectsByIds(offers, favoritesOfferIds);
 
   const hotelsList = (
-    <ObjectList data={favHotels as IHotel[]} listType="hotel">
+    <ObjectList data={favHotels as IHotel[]} listType={NavigationTypes.Hotel}>
       <View style={styles.title}>
         <SectionTitle title={mainTitleHotelFavorites[1]} />
       </View>
@@ -34,7 +35,7 @@ function FavoritesList() {
   );
 
   const offersList = (
-    <ObjectList data={favOffers as IOffer[]} listType="offer">
+    <ObjectList data={favOffers as IOffer[]} listType={NavigationTypes.Offer}>
       <View style={styles.title}>
         <SectionTitle title={mainTitleOfferFavorites[1]} />
       </View>
