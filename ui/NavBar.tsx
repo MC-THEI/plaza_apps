@@ -5,7 +5,71 @@ import { NavigationTypes } from '../types/NavigationTypes';
 import { IcoMoon_mci, IcoMoon_pwai } from './IcoMoon';
 import useFavorites from '../hooks/getDataHooks/useFavorites';
 import { useAppDispatch } from '../store/redux/store';
-import { setSelectedMapList } from '../store/redux/map';
+import { toggleMenu } from '../store/redux/languages';
+import { availableLanguages } from '../constants/constants';
+import useLanguage from '../hooks/getDataHooks/useLanguage';
+
+function NavBar() {
+  const navigation = useNavigation();
+  const { favoritesOfferIds, favoritesHotelIds } = useFavorites();
+  const { currentLanguage } = useLanguage();
+
+  const dispatch = useAppDispatch();
+
+  const areFavorites =
+    favoritesOfferIds.length > 0 || favoritesHotelIds.length > 0;
+
+  function handlePressNavBtn(navName: NavigationTypes) {
+    (navigation.navigate as (routeName: string) => void)(navName);
+  }
+
+  function handlePressBackBtn() {
+    if (navigation.canGoBack()) navigation.goBack();
+  }
+
+  function handlePressLangBtn() {
+    dispatch(toggleMenu());
+  }
+
+  return (
+    <View style={styles.container}>
+      <NavBtn onPress={() => handlePressNavBtn(NavigationTypes.Home)}>
+        <IcoMoon_pwai
+          name="home"
+          size={22}
+          color={GlobalStyles.colors.accentGold}
+        />
+      </NavBtn>
+
+      <NavBtn onPress={() => handlePressBackBtn()}>
+        <IcoMoon_mci
+          name="chevron-left"
+          size={22}
+          color={GlobalStyles.colors.accentGold}
+        />
+      </NavBtn>
+      <NavBtn onPress={() => handlePressNavBtn(NavigationTypes.Favorite)}>
+        <IcoMoon_pwai
+          name={areFavorites ? 'heart' : 'heart-contour'}
+          size={22}
+          color={GlobalStyles.colors.accentRed}
+        />
+      </NavBtn>
+      <NavBtn onPress={() => handlePressNavBtn(NavigationTypes.Map)}>
+        <IcoMoon_pwai
+          name="search"
+          size={22}
+          color={GlobalStyles.colors.accentGold}
+        />
+      </NavBtn>
+      <NavBtn onPress={() => handlePressLangBtn()}>
+        <Text style={styles.langButton}>
+          {availableLanguages[currentLanguage]}
+        </Text>
+      </NavBtn>
+    </View>
+  );
+}
 
 function NavBtn({
   onPress,
@@ -18,61 +82,6 @@ function NavBtn({
     <Pressable style={styles.buttonsContainer} onPress={onPress}>
       <View style={styles.button}>{children}</View>
     </Pressable>
-  );
-}
-
-function NavBar() {
-  const dispatch = useAppDispatch();
-  const navigation = useNavigation();
-  const { favoritesOfferIds, favoritesHotelIds } = useFavorites();
-
-  const areFavorites =
-    favoritesOfferIds.length > 0 || favoritesHotelIds.length > 0;
-
-  function handleClickNavBtn(navName: NavigationTypes) {
-    //dispatch(setSelectedMapList(NavigationTypes.Hotel));
-    (navigation.navigate as (routeName: string) => void)(navName);
-  }
-
-  function handleClickBack() {
-    if (navigation.canGoBack()) navigation.goBack();
-  }
-
-  return (
-    <View style={styles.container}>
-      <NavBtn onPress={() => handleClickNavBtn(NavigationTypes.Home)}>
-        <IcoMoon_pwai
-          name="home"
-          size={22}
-          color={GlobalStyles.colors.accentGold}
-        />
-      </NavBtn>
-
-      <NavBtn onPress={() => handleClickBack()}>
-        <IcoMoon_mci
-          name="chevron-left"
-          size={22}
-          color={GlobalStyles.colors.accentGold}
-        />
-      </NavBtn>
-      <NavBtn onPress={() => handleClickNavBtn(NavigationTypes.Favorite)}>
-        <IcoMoon_pwai
-          name={areFavorites ? 'heart' : 'heart-contour'}
-          size={22}
-          color={GlobalStyles.colors.accentRed}
-        />
-      </NavBtn>
-      <NavBtn onPress={() => handleClickNavBtn(NavigationTypes.Map)}>
-        <IcoMoon_pwai
-          name="search"
-          size={22}
-          color={GlobalStyles.colors.accentGold}
-        />
-      </NavBtn>
-      <NavBtn onPress={() => {}}>
-        <Text style={styles.langButton}>DE</Text>
-      </NavBtn>
-    </View>
   );
 }
 
