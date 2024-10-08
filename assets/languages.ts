@@ -49,7 +49,7 @@ export const facilitiesTitle: TitleTypes = {
 // FavoritesScreen -------------------------------------------------------------
 
 export const mainTitleFavorites = {
-  1: { mainTitle: 'Ihr', subTitle: 'Favoriten' },
+  1: { mainTitle: 'Ihre', subTitle: 'Favoriten' },
   2: { mainTitle: 'Your', subTitle: 'Favorites' },
 };
 
@@ -65,6 +65,21 @@ export const mainTitleOfferFavorites = {
 export const filterButtonsTitle = {
   hotels: { 1: 'Hotels', 2: 'Hotels' },
   offers: { 1: 'Angebote', 2: 'Offers' },
+};
+
+export const emptyFavoritesTitles = {
+  emptyHotels: {
+    1: 'Derzeit gibt es keine Hotel-Favoriten.',
+    2: 'There are currently no hotel favorites.',
+  },
+  emptyOffers: {
+    1: 'Derzeit gibt es keine Angebots-Favoriten.',
+    2: 'There are currently no offer favorites.',
+  },
+  emptyList: {
+    1: 'Es sind noch keine Favoriten gespeichert.',
+    2: 'There are no favorites saved yet.',
+  },
 };
 
 // OfferScreen -----------------------------------------------------------------
