@@ -23,7 +23,7 @@ export const storeDataAsync = createAsyncThunk(
   }
 );
 
-export const getDataAsync = createAsyncThunk(
+export const getFavotitesFromDbThunk = createAsyncThunk(
   'favorites/getDataFromAsyncStorage',
   async () => {
     const keys = ['favoritesHotelIds', 'favoritesOfferIds'];
@@ -93,10 +93,10 @@ const favoritesSlice = createSlice({
       console.error('getData rejected:', action.error);
     });
 
-    builder.addCase(getDataAsync.pending, (state, action) => {
+    builder.addCase(getFavotitesFromDbThunk.pending, (state, action) => {
       state.favoritesLoading = true;
     });
-    builder.addCase(getDataAsync.fulfilled, (state, action) => {
+    builder.addCase(getFavotitesFromDbThunk.fulfilled, (state, action) => {
       console.log('action.payload', action.payload);
       if (action.payload) {
         state.favoritesLoading = false;
@@ -106,7 +106,7 @@ const favoritesSlice = createSlice({
         console.error('No payload received in getDataAsync.fulfilled');
       }
     });
-    builder.addCase(getDataAsync.rejected, (state, action) => {
+    builder.addCase(getFavotitesFromDbThunk.rejected, (state, action) => {
       state.favoritesLoading = false;
       console.error('getData rejected:', action.error);
     });
