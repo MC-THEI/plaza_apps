@@ -5,6 +5,7 @@ import favoritesReducer from './favorites';
 import mapReducer from './map';
 import hotelsReducer from './hotels';
 import offersReducer from './offers';
+import languageReducer from './languages';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     offers: offersReducer,
     favorites: favoritesReducer,
     map: mapReducer,
+    language: languageReducer,
   },
 });
 
